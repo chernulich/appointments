@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/__Coding_pg/java/zzLibs/ical4j/ical4j-3.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/__Coding_pg/java/zzLibs/slf4j_logger/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/__Coding_pg/java/zzLibs/slf4j_logger/slf4j-simple-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/__Coding_pg/java/zzLibs/commons-lang3/commons-lang3-3.7.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
