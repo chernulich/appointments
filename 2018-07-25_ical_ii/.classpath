@@ -2,9 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/slf4j-simple-1.7.25.jar"/>
-	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/slf4j-api-1.7.25.jar"/>
-	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/ical4j-3.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/commons-lang3-3.7.jar"/>
+	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/vinnie-2.0.2.jar"/>
+	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/biweekly-0.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/jackson-databind-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/jackson-core-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/____files/_Docs/Office/__Pro_Coding/Java/Repos/appointments/2018-07-25_ical_ii/lib/jackson-annotations-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
