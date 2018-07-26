@@ -60,7 +60,7 @@ public class Main {
 		System.out.println(calendar.getFreeBusies());
 	}
 
-
+	//adding freeBusy to the calendar
 	private static void addBusy(ICalendar calendar, VEvent eventII) {
 		VFreeBusy freebusy = new VFreeBusy();
 		Date start = eventII.getDateStart().getValue();
@@ -70,6 +70,7 @@ public class Main {
 		calendar.addFreeBusy(freebusy);
 	}
 
+	//adding data to the VEvent; 
 	private static VEvent fillEvent(VEvent event, LocalDateTime fillTime) {
 		Summary summary = event.setSummary("Team Meeting");
 		summary.setLanguage("en-us");
