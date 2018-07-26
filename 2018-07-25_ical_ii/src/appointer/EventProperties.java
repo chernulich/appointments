@@ -1,7 +1,7 @@
-package pg.ical;
+package appointer;
 
 /**
- * Payload for Event
+ * Interface for AppEvent's payload
  */
 public interface EventProperties {
 	public EventCategory getCategory();

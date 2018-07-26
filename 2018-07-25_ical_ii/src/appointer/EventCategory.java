@@ -1,4 +1,4 @@
-package pg.ical;
+package appointer;
 
 /**
  * General types of events in the appointment scheduler.	
