@@ -1,4 +1,4 @@
-package pg.ical;
+package appointer.util;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class LegacyDateConverter {
+public class DateAdapter {
 	// https://stackoverflow.com/a/27323328
 	public static Date asDate(LocalDate localDate) {
 		return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
