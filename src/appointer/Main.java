@@ -5,10 +5,14 @@ import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
+
+import appointer.calendar.Importance;
+import appointer.calendar.ImportanceScribe;
 import appointer.component.AppEvent;
 import appointer.component.AppEventCollection;
 import appointer.component.AppUser;
 import appointer.util.DateAdapter;
+import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
@@ -58,6 +62,18 @@ public class Main {
 		addBusy(calendar, eventII);
 		System.out.println("Free/Busy functionality");
 		System.out.println(calendar.getFreeBusies());
+		
+		//tryint to get custom property to work
+		ICalendar ical = new ICalendar();
+		Importance property = new Importance(1);
+		ical.addProperty(property);
+
+		//using "Biweekly" class
+		String icalStr = Biweekly.write(ical)
+		                         .register(new ImportanceScribe())
+		                         .go();
+		System.out.println(icalStr);
+		
 	}
 
 	//adding freeBusy to the calendar
