@@ -14,7 +14,6 @@ import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 public class PhoneParcerTest {
 	public static void test() {
 
-		printPhoneNumber("044 668 18 00");
 		printPhoneNumber("+7 999 078 62 92");
 		printPhoneNumber("+972 054 878 20 38");
 		printPhoneNumber("+7 495 379 68 44");
@@ -25,16 +24,23 @@ public class PhoneParcerTest {
 	private static void printPhoneNumber(String number) {
 		
 		System.out.println("\nPHONE NUMBER IS " + number);
-		PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+		PhoneNumberUtil phoneUtil = 
+				PhoneNumberUtil.getInstance();
+		PhoneNumberOfflineGeocoder geocoder = 
+				PhoneNumberOfflineGeocoder.getInstance();
 		try {
-			PhoneNumber parsedNumber = phoneUtil.parse(number, "CH");
-			System.out.println("COUNTRY CODE " + parsedNumber.getCountryCode());
-			System.out.println("NATIONAL NUMBER " + parsedNumber.getNationalNumber());
-			PhoneNumberOfflineGeocoder geocoder = PhoneNumberOfflineGeocoder.getInstance();
-			System.out.println("CITY " + geocoder.getDescriptionForNumber(parsedNumber, Locale.ENGLISH));
+			PhoneNumber parsed = phoneUtil.parse(number, "CH");
+			parsedPrint(geocoder, parsed);
 		} catch (NumberParseException e) {
-			System.err.println("NumberParseException was thrown: " + e.toString());
+			System.err.println(
+					"NumberParseException was thrown: " + e.toString());
 		}
 
+	}
+
+	private static void parsedPrint(PhoneNumberOfflineGeocoder geocoder, PhoneNumber parsed) {
+		System.out.println("COUNTRY CODE " + parsed.getCountryCode());
+		System.out.println("NATIONAL NUMBER " + parsed.getNationalNumber());
+		System.out.println("LOCATION " + geocoder.getDescriptionForNumber(parsed, Locale.ENGLISH));
 	}
 }
