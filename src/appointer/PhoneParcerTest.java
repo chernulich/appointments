@@ -14,10 +14,10 @@ import com.google.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 public class PhoneParcerTest {
 	public static void test() {
 
-		printPhoneNumber("+7 999 078 62 92");
-		printPhoneNumber("+972 054 878 20 38");
-		printPhoneNumber("+7 495 379 68 44");
-		printPhoneNumber("+7 831 604 24 38");
+		printPhoneNumber("+7 999 078 69 99");
+		printPhoneNumber("+972 054 878 29 39");
+		printPhoneNumber("+7 495 379 69 49");
+		printPhoneNumber("+7 831 604 24 39");
 		
 	}
 
