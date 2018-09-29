@@ -1,7 +1,5 @@
 package appointer.component;
 
-import appointer.User;
-
 /**
  * mock User class
  */

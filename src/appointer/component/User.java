@@ -1,4 +1,4 @@
-package appointer;
+package appointer.component;
 
 /**
  * Mock User interface

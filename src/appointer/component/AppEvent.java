@@ -2,7 +2,6 @@ package appointer.component;
 
 import java.util.Date;
 
-import appointer.User;
 import biweekly.component.VEvent;
 
 /**
