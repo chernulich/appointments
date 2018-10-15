@@ -24,7 +24,8 @@ import biweekly.util.Duration;
  * we have to probably wrap its event and duplicate its calendar with the AppEvent collection
  * 
  */
-public class CalendarTest {
+public class Calendar {
+	
 	public static void test() {
 		// AppEventCollection holds the wrapper class AppEvent;
 		AppEventCollection col = new AppEventCollection();

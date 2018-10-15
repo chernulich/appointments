@@ -19,16 +19,6 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>com.googlecode.libphonenumber</groupId>
-			<artifactId>libphonenumber</artifactId>
-			<version>4.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.libphonenumber</groupId>
-			<artifactId>geocoder</artifactId>
-			<version>1.7</version>
-		</dependency>
-		<dependency>
 			<groupId>net.sf.biweekly</groupId>
 			<artifactId>biweekly</artifactId>
 			<version>0.6.2</version>
