@@ -55,7 +55,7 @@ public class PhoneParcerTest {
 	   /**
 	     * @return line from input that passed authentication 
 	     * @param data IAuthData object
-	     * Decorator over BufferedReader that takes coupled Command IAuthData; 
+	     * Adapter over BufferedReader that takes coupled Command IAuthData; 
 	     */
 	     */
 /*	    public static String readOneLine(promptData data){
