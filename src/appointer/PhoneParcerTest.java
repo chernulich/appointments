@@ -2,6 +2,10 @@ package appointer;
 
 import java.util.Locale;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
@@ -19,6 +23,10 @@ public class PhoneParcerTest {
 		printPhoneNumber("+7 495 379 69 49");
 		printPhoneNumber("+7 831 604 24 39");
 		
+	}
+	
+	public static void read(){
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	}
 
 	private static void printPhoneNumber(String number) {
@@ -43,4 +51,23 @@ public class PhoneParcerTest {
 		System.out.println("NATIONAL NUMBER " + parsed.getNationalNumber());
 		System.out.println("LOCATION " + geocoder.getDescriptionForNumber(parsed, Locale.ENGLISH));
 	}
+	
+	   /**
+	     * @return line from input that passed authentication 
+	     * @param data IAuthData object
+	     * Decorator over BufferedReader that takes coupled Command IAuthData; 
+	     */
+	     */
+/*	    public static String readOneLine(promptData data){
+		String line = null;
+		while(true){
+		    System.out.println(data.getHint());
+		    try {
+			line = data.getReader().readLine();
+		    } catch (IOException e) {}
+		    if (line.equals(data.getExitWord())) return null;
+		    if (data.authPassed(line)) break;
+		}
+		return line;
+	    }*/
 }
