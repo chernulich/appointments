@@ -1,4 +1,4 @@
-package appointer.component;
+package appointer.calendar;
 
 /**
  * mock User class

@@ -1,7 +1,7 @@
 package appointer;
 
 /**
- * Demonstration of project libraries
+ * Demonstration of project Calendar library
  *
  */
 public class CalendarTest {

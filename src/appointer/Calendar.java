@@ -5,9 +5,9 @@ import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-import appointer.component.AppEvent;
-import appointer.component.AppEventCollection;
-import appointer.component.AppUser;
+import appointer.calendar.AppEvent;
+import appointer.calendar.AppEventCollection;
+import appointer.calendar.AppUser;
 import appointer.util.DateAdapter;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;

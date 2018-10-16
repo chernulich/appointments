@@ -1,4 +1,4 @@
-package appointer.component;
+package appointer.calendar;
 
 import java.util.TreeSet;
 
