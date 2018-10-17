@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.stream.Stream;
 
 import appointer.util.date.DateAdapter;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
+import biweekly.property.Organizer;
 import biweekly.property.Summary;
 import biweekly.util.Duration;
 
@@ -33,7 +35,7 @@ public class Calendar {
 	}
 
 	// adding data to the VEvent;
-	public static VEvent fillEvent(VEvent event, LocalDateTime fillTime) {
+	public static VEvent createEvent(VEvent event, LocalDateTime fillTime) {
 		Summary summary = event.setSummary("Team Meeting");
 		summary.setLanguage("en-us");
 
@@ -44,4 +46,24 @@ public class Calendar {
 		event.setDuration(duration);
 		return event;
 	}
+	/**
+	 * print a calendar
+	 * @param calendar
+	 */
+	private static void printCalendar(ICalendar calendar) {
+		Stream.of(calendar.getEvents()).forEach(System.out::println);
+	}
+	
+	/**
+	 * @param event
+	 * @param organiserName name of user
+	 * @return
+	 */
+	public static VEvent setOrganiser(VEvent event, String organiserName) {
+		event.setOrganizer(new Organizer(organiserName, ""));
+		return event;
+	}
+
 }
+
+//private static void createEvent(String name, <...>)
