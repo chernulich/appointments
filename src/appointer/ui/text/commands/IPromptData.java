@@ -1,4 +1,4 @@
-package appointer.uicommands;
+package appointer.ui.text.commands;
 
 import java.io.BufferedReader;
 

@@ -1,5 +1,7 @@
 package appointer;
 
+import appointer.util.net.PhoneRESTServiceClient;
+
 /**
  * Demo of sending phone number to server and getting the answer
  *

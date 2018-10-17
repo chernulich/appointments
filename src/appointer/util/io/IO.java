@@ -1,11 +1,11 @@
-package appointer;
+package appointer.util.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import appointer.uicommands.IPromptData;
-import appointer.uicommands.StringQuestionData;
+import appointer.ui.text.commands.IPromptData;
+import appointer.ui.text.commands.StringQuestionData;
 
 public class IO {
 	

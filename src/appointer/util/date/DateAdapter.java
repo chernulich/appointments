@@ -1,4 +1,4 @@
-package appointer.util;
+package appointer.util.date;
 
 import java.time.Instant;
 import java.time.LocalDate;
