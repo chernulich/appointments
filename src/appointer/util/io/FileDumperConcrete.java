@@ -46,10 +46,10 @@ public class FileDumperConcrete {
 	 * @throws IOException
 	 */
 	public static void startDump(String fileName) throws IOException {
-		System.out.println("Non-replacing default dump");
+		System.out.println("Writing to file...");
 		File file = new File(fileName);
 		file.createNewFile();
-		filewriter = new PrintWriter(new FileWriter(fileName, true));
+		filewriter = new PrintWriter(new FileWriter(fileName, false));
 	}
 	
 	public static void doDump(String string) {
