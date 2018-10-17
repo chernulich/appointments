@@ -10,8 +10,6 @@ import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
 /**
- * Demonstration of project Calendar library
- *
  */
 public class CalendarTest {
 	public static void main(String[] args) {
