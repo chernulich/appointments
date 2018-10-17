@@ -1,4 +1,4 @@
 # appointments
-Appointment scheduler programming studies
+Appointment client
 
-Currently implementing based on BiWeekly https://github.com/mangstadt/biweekly and libphonenumber https://github.com/googlei18n/libphonenumber
+Carries calendar and can send to sender a phone number to check; 
