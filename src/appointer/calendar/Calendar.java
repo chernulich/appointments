@@ -4,13 +4,17 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 import appointer.util.date.DateAdapter;
 import biweekly.ICalendar;
+import biweekly.component.ICalComponent;
 import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
+import biweekly.property.ICalProperty;
 import biweekly.property.Organizer;
 import biweekly.property.Summary;
 import biweekly.util.Duration;
@@ -55,6 +59,29 @@ public class Calendar {
 	}
 	
 	/**
+	 * Prints properties of BiWeekly calendar component;
+	 * @param vEventOne
+	 */
+	public static <T extends ICalComponent> void printComponentProperties(T vEventOne) {
+		for (Entry<Class<? extends ICalProperty>, List<ICalProperty>> property : vEventOne.getProperties()) {
+			System.out.println(property.getKey().toString());
+		    property.getValue()
+		    .forEach(System.out::println);
+		    property.getValue().forEach(p -> p.getParameters().forEach(System.out::println));
+		}
+	}
+	
+	/**
+	 * Prints extra components of BiWeekly calendar component;
+	 * @param vEventOne
+	 */
+	public static <T extends ICalComponent> void printComponentComponents(T vEventOne) {
+		for (Entry<Class<? extends ICalComponent>, List<ICalComponent>> component : vEventOne.getComponents()) {
+			System.out.println(component.getKey().toString());
+		}
+	}
+
+	/**
 	 * @param event
 	 * @param organiserName name of user
 	 * @return
@@ -64,6 +91,13 @@ public class Calendar {
 		return event;
 	}
 
+	/**
+	 * VEvent is the Biweekly implementation of calendar event; creating VEvent for now;
+	 */
+	public static VEvent createEventCurrentTime() {
+		VEvent vEventOne = new VEvent();
+		LocalDateTime timeNow = LocalDateTime.now();
+		vEventOne = Calendar.createEvent(vEventOne, timeNow);
+		return vEventOne;
+	}
 }
-
-//private static void createEvent(String name, <...>)
