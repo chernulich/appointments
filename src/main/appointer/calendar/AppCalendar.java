@@ -4,17 +4,12 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.Period;
 import java.util.Date;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 import appointer.util.date.DateAdapter;
 import biweekly.ICalendar;
-import biweekly.component.ICalComponent;
 import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
-import biweekly.property.ICalProperty;
 import biweekly.property.Organizer;
 import biweekly.util.Duration;
 
@@ -27,64 +22,14 @@ import biweekly.util.Duration;
 public class AppCalendar {
 	
 	
-	
-	/**
-	 * VEvent is the Biweekly implementation of calendar event; creating VEvent for now;
-	 */
-	public static VEvent createEventCurrentTime() {
-		VEvent vEventOne = new VEvent();
-		LocalDateTime timeNow = LocalDateTime.now();
-		vEventOne = AppCalendar.setEventStart(vEventOne, timeNow);
-		return vEventOne;
-	}
 
-	/**
-	 * 
-	 * @param event
-	 * @param fillTime
-	 * @return
-	 */
-	public static VEvent addOneHourToEvent(VEvent event) {
-		Duration duration = new Duration.Builder().hours(1).build();
-		event.setDuration(duration);
-		return event;
-	}
-	
-	/**
-	 * 
-	 * @param event
-	 * @param fillTime
-	 * @return
-	 */
-	public static VEvent setEventStart(VEvent event, LocalDateTime fillTime) {
-		Date start = DateAdapter.asDate(fillTime);
-		event.setDateStart(start);
-		return event;
-	}
-	
-	public static void setEventEnd(VEvent event, LocalDateTime endTime){}
-	
-	public static void rescheduleEvent(VEvent event, Duration duration){}
-	
-	public static void setEventRepeats(VEvent event, Period period){}
-
-	/**
-	 * @param event any VEvent; 
-	 * @param organiserName name of event client 
-	 * @return new VEvent
-	 */
-	public static VEvent setOrganiser(VEvent event, String organiserName) {
-		event.setOrganizer(new Organizer(organiserName, ""));
-		return event;
-	}
-
-	
 	/**
 	 * Reads time of start and end of event and then creates and adds to calendar an instance of VFreeBusy class; 
 	 * @param calendar 
 	 * @param event
 	 */
 	// does too much, has to refactor
+	// event transparency exist;
 	public static void addBusy(ICalendar calendar, VEvent event) {
 		VFreeBusy freebusy = new VFreeBusy();
 		Date start = event.getDateStart().getValue();
@@ -102,39 +47,6 @@ public class AppCalendar {
 	public static boolean checkBusy(ICalendar calendar, LocalDateTime time) {
 		return false;
 	}
-		
 	
-	//best move to separate class; leave toString;
-	/**
-	 * print a calendar
-	 * @param calendar
-	 */
-	public static void printCalendar(ICalendar calendar) {
-		Stream.of(calendar.getEvents()).forEach(System.out::println);
-	}
-	
-	/**
-	 * Prints properties of BiWeekly calendar component;
-	 * @param vEventOne
-	 */
-	public static <T extends ICalComponent> void printComponentProperties(T vEventOne) {
-		for (Entry<Class<? extends ICalProperty>, List<ICalProperty>> property : vEventOne.getProperties()) {
-			System.out.println(property.getKey().toString());
-		    property.getValue()
-		    .forEach(System.out::println);
-		    property.getValue().forEach(p -> p.getParameters().forEach(System.out::println));
-		}
-	}
-	
-	/**
-	 * Prints extra components of BiWeekly calendar component;
-	 * @param vEventOne
-	 */
-	public static <T extends ICalComponent> void printComponentComponents(T vEventOne) {
-		for (Entry<Class<? extends ICalComponent>, List<ICalComponent>> component : vEventOne.getComponents()) {
-			System.out.println(component.getKey().toString());
-		}
-	}
-
 	
 }

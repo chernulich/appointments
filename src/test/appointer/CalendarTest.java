@@ -3,8 +3,10 @@ package appointer;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import appointer.calendar.AppUser;
 import appointer.calendar.AppCalendar;
+import appointer.calendar.CalendarPrinter;
+import appointer.calendar.EventFacade;
+import appointer.user.AppUser;
 import appointer.util.io.IOCalendarPersistence;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
@@ -25,13 +27,13 @@ public class CalendarTest {
 	 * Creates and prints an event belonging to user;
 	 */
 	private static void createJohnDoeEventAndPrint() {
-		VEvent vEventOne = AppCalendar.createEventCurrentTime(); //we still might need an adapter;
+		VEvent vEventOne = EventFacade.createEventCurrentTime(); //we still might need an adapter;
 			
-		AppCalendar.setOrganiser(vEventOne, new AppUser("John Doe").getName());
+		EventFacade.setOrganiser(vEventOne, new AppUser("John Doe").getName());
 		
-		AppCalendar.printComponentProperties(vEventOne);
+		CalendarPrinter.printComponentProperties(vEventOne);
 		
-		AppCalendar.printComponentComponents(vEventOne);
+		CalendarPrinter.printComponentComponents(vEventOne);
 			
 		System.out.println("Finished");
 	}
@@ -43,9 +45,8 @@ public class CalendarTest {
 	private static void testCalendarPersistence() {
 		ICalendar calendar = new ICalendar();
 
-		// AppEvent is the wrapper to the library class VEvent;
-		VEvent vEventOne = AppCalendar.createEventCurrentTime();
-		AppCalendar.addOneHourToEvent(vEventOne);
+		VEvent vEventOne = EventFacade.createEventCurrentTime();
+		EventFacade.addOneHourToEvent(vEventOne);
 		calendar.addEvent(vEventOne);
 		
 		ArrayList<ICalendar> alc = new ArrayList<ICalendar>();

@@ -1,4 +1,4 @@
-package appointer.calendar;
+package appointer.user;
 
 import java.util.concurrent.ConcurrentHashMap;
 

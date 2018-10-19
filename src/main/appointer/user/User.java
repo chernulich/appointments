@@ -1,4 +1,4 @@
-package appointer.calendar;
+package appointer.user;
 
 import biweekly.ICalendar;
 
