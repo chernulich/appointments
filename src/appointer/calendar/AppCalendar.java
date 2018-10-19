@@ -2,7 +2,7 @@ package appointer.calendar;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-impoer java.time.Duration;
+import java.time.Duration;
 import java.time.Period;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +26,8 @@ import biweekly.util.Duration;
  * The project aims to provide a well documented, easy to use API for reading and writing iCalendar data.
  */
 public class AppCalendar {
+	
+	
 	
 	/**
 	 * VEvent is the Biweekly implementation of calendar event; creating VEvent for now;
@@ -68,9 +70,9 @@ public class AppCalendar {
 	public static void setEventRepeats(VEvent event, Period period){}
 
 	/**
-	 * @param event
-	 * @param organiserName name of user
-	 * @return
+	 * @param event any VEvent; 
+	 * @param organiserName name of event client 
+	 * @return new VEvent
 	 */
 	public static VEvent setOrganiser(VEvent event, String organiserName) {
 		event.setOrganizer(new Organizer(organiserName, ""));
@@ -79,9 +81,11 @@ public class AppCalendar {
 
 	
 	/**
-	 * @param calendar
+	 * Reads time of start and end of event and then creates and adds to calendar an instance of VFreeBusy class; 
+	 * @param calendar 
 	 * @param event
 	 */
+	// does too much, has to refactor
 	public static void addBusy(ICalendar calendar, VEvent event) {
 		VFreeBusy freebusy = new VFreeBusy();
 		Date start = event.getDateStart().getValue();
@@ -89,6 +93,15 @@ public class AppCalendar {
 				.plus(event.getDuration().getValue().toMillis(), ChronoUnit.MILLIS));
 		freebusy.addFreeBusy(FreeBusyType.BUSY, start, end);
 		calendar.addFreeBusy(freebusy);
+	}
+		
+	
+	public static boolean checkBusy(ICalendar calendar, LocalDateTime startTime, LocalDateTime endTime) {
+		return false;
+	}
+	
+	public static boolean checkBusy(ICalendar calendar, LocalDateTime time) {
+		return false;
 	}
 		
 	
