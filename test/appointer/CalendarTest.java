@@ -12,10 +12,10 @@ import biweekly.component.VEvent;
 /**
  */
 public class CalendarTest {
+	
 	public static void main(String[] args) {
 		
 		createJohnDoeEventAndPrint();
-		
 		
 		testCalendarPersistence();	
 		
