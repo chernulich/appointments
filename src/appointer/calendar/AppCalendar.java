@@ -2,6 +2,8 @@ package appointer.calendar;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+impoer java.time.Duration;
+import java.time.Period;
 import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
@@ -58,6 +60,12 @@ public class AppCalendar {
 		event.setDateStart(start);
 		return event;
 	}
+	
+	public static void setEventEnd(VEvent event, LocalDateTime endTime){}
+	
+	public static void rescheduleEvent(VEvent event, Duration duration){}
+	
+	public static void setEventRepeats(VEvent event, Period period){}
 
 	/**
 	 * @param event
@@ -82,7 +90,9 @@ public class AppCalendar {
 		freebusy.addFreeBusy(FreeBusyType.BUSY, start, end);
 		calendar.addFreeBusy(freebusy);
 	}
-
+		
+	
+	//best move to separate class; leave toString;
 	/**
 	 * print a calendar
 	 * @param calendar
