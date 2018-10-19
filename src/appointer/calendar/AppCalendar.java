@@ -18,9 +18,10 @@ import biweekly.property.Organizer;
 import biweekly.util.Duration;
 
 /**
- * Static wrapper over Biweekly Calendar;
- * 
- * ToPHILL: Why calendar named "Biweekly"?
+ * Static wrapper over biweekly calendar; 
+ * https://github.com/mangstadt/biweekly
+ * biweekly is an iCalendar library written in Java. 
+ * The project aims to provide a well documented, easy to use API for reading and writing iCalendar data.
  */
 public class AppCalendar {
 	
