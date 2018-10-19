@@ -2,30 +2,69 @@ package appointer.calendar;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.Period;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import appointer.user.User;
 import appointer.util.date.DateAdapter;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
-import biweekly.property.Organizer;
-import biweekly.util.Duration;
 
 /**
- * Static wrapper over biweekly calendar; 
- * https://github.com/mangstadt/biweekly
- * biweekly is an iCalendar library written in Java. 
- * The project aims to provide a well documented, easy to use API for reading and writing iCalendar data.
+ * Wrapper over biweekly calendar; https://github.com/mangstadt/biweekly
+ * biweekly won by comparison to older iCal4j library;
  */
 public class AppCalendar {
-	
-	
+	/**
+	 * Abstraction function: name, calendar -> AppCalendar
+	 */
+	/**
+	 * Rep invariant: user and calendar not null;
+	 * 0 <= calendars.size <= 1;
+	 */
+	private final User user;
+	private final ICalendar calendar;
+	private static final List<AppCalendar> calendars = new ArrayList<AppCalendar>();
 
 	/**
-	 * Reads time of start and end of event and then creates and adds to calendar an instance of VFreeBusy class; 
-	 * @param calendar 
+	 * @param appUser
+	 */
+	private AppCalendar(User appUser) {
+		if (appUser == null)
+			throw new IllegalArgumentException();
+		user = appUser;
+		calendar = new ICalendar();
+	}
+
+	/**
+	 * Singleton static factory
+	 * 
+	 * @param appUser
+	 * @return
+	 */
+	public static AppCalendar getAppCalendar(User appUser) {
+		if (calendars.isEmpty()) {
+			calendars.add(new AppCalendar(appUser));
+		}
+		return calendars.get(0);
+	}
+
+	public String getName() {
+		return user.getName();
+	}
+
+	public ICalendar getCalendar() {
+		return calendar;
+	}
+
+	/**
+	 * Reads time of start and end of event and then creates and adds to calendar an
+	 * instance of VFreeBusy class;
+	 * 
+	 * @param calendar
 	 * @param event
 	 */
 	// does too much, has to refactor
@@ -33,20 +72,18 @@ public class AppCalendar {
 	public static void addBusy(ICalendar calendar, VEvent event) {
 		VFreeBusy freebusy = new VFreeBusy();
 		Date start = event.getDateStart().getValue();
-		Date end = DateAdapter.asDate(DateAdapter.asLocalDateTime(start)
-				.plus(event.getDuration().getValue().toMillis(), ChronoUnit.MILLIS));
+		Date end = DateAdapter.asDate(
+				DateAdapter.asLocalDateTime(start).plus(event.getDuration().getValue().toMillis(), ChronoUnit.MILLIS));
 		freebusy.addFreeBusy(FreeBusyType.BUSY, start, end);
 		calendar.addFreeBusy(freebusy);
 	}
-		
-	
+
 	public static boolean checkBusy(ICalendar calendar, LocalDateTime startTime, LocalDateTime endTime) {
 		return false;
 	}
-	
+
 	public static boolean checkBusy(ICalendar calendar, LocalDateTime time) {
 		return false;
 	}
-	
-	
+
 }

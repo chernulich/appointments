@@ -15,7 +15,7 @@ import appointer.util.io.IO;
  * 
  */
  
-public class PhoneRESTServiceClient {
+public class PhoneRESTClient {
 	
 	public static void sendPhone() {
 		String string = IO.phoneFromUser();

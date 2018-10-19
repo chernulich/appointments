@@ -3,7 +3,6 @@ package appointer;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import appointer.calendar.AppCalendar;
 import appointer.calendar.CalendarPrinter;
 import appointer.calendar.EventFacade;
 import appointer.user.AppUser;
@@ -12,8 +11,9 @@ import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
 /**
+ * Welcome to biweekly, CalendarPrinter and EventFacade
  */
-public class CalendarTest {
+public class WelcomeTest {
 	
 	public static void main(String[] args) {
 		

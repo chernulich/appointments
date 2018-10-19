@@ -1,6 +1,6 @@
 package appointer;
 
-import appointer.util.net.PhoneRESTServiceClient;
+import appointer.util.net.PhoneRESTClient;
 
 /**
  * Demo of sending phone number to server and getting the answer
@@ -9,7 +9,7 @@ import appointer.util.net.PhoneRESTServiceClient;
 public class PhoneSenderTest {
 	
 	public static void main(String[] args) {
-		PhoneRESTServiceClient.sendPhone();
+		PhoneRESTClient.sendPhone();
 	}
 
 }
