@@ -19,6 +19,8 @@ import biweekly.util.Duration;
 
 /**
  * Static wrapper over Biweekly Calendar;
+ * 
+ * ToPHILL: Why calendar named "Biweekly"?
  */
 public class AppCalendar {
 	
