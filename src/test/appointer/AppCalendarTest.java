@@ -6,6 +6,7 @@ import appointer.calendar.EventFacade;
 import appointer.user.AppUser;
 import appointer.user.User;
 import biweekly.component.VEvent;
+import biweekly.util.Frequency;
 
 public class AppCalendarTest {
 
@@ -13,8 +14,25 @@ public class AppCalendarTest {
 	public static void main(String[] args) {
 
 		createJaneEventAndPrint();
-
+		
+		recurrenceDemo();
 	}
+
+	/**
+	 * Recurrency works as event recurrence rule that holds recurrence as value;
+	 */
+	private static void recurrenceDemo() {
+
+		VEvent vEventOne = EventFacade.createEventCurrentTime(); // we still might need an adapter;
+
+		EventFacade.setEventRepeats(vEventOne, Frequency.DAILY);
+
+		EventFacade.getLocalDateStream(vEventOne).limit(100).forEach(System.out::println);
+		
+		System.out.println("Recurring event display finished");
+	}
+
+
 
 	/**
 	 * Creates and prints an event belonging to user;
@@ -33,6 +51,6 @@ public class AppCalendarTest {
 
 		CalendarPrinter.printCalendar(appCalendar.getCalendar());
 
-		System.out.println("Finished");
+		System.out.println("Event display finished");
 	}
 }

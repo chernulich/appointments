@@ -1,13 +1,21 @@
 package appointer.calendar;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.Date;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.TimeZone;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import appointer.util.date.DateAdapter;
 import biweekly.component.VEvent;
 import biweekly.property.Organizer;
 import biweekly.util.Duration;
+import biweekly.util.Frequency;
+import biweekly.util.Recurrence;
+import biweekly.util.com.google.ical.compat.javautil.DateIterator;
 
 public class EventFacade {
 	// Facade over VEvent;
@@ -55,8 +63,9 @@ public class EventFacade {
 		// what if other event is there?
 	}
 
-	public static void setEventRepeats(VEvent event, Period period) {
-		// what if it repeats layer on other events
+	public static void setEventRepeats(VEvent event, Frequency frequency) {
+		Recurrence recur = new Recurrence.Builder(frequency).build();
+		event.setRecurrenceRule(recur);
 	}
 
 	/**
@@ -69,6 +78,16 @@ public class EventFacade {
 	public static VEvent setOrganiser(VEvent event, String organiserName) {
 		event.setOrganizer(new Organizer(organiserName, ""));
 		return event;
+	}
+	
+	/**
+	 * @param event
+	 * @return stream of localdates for recurring event
+	 */
+	public static Stream<LocalDate> getLocalDateStream(VEvent event) {
+		DateIterator dates = event.getDateIterator(TimeZone.getDefault());
+		return StreamSupport.stream(Spliterators.spliteratorUnknownSize(dates, Spliterator.ORDERED), false)
+				.map(DateAdapter::asLocalDate);
 	}
 
 }
