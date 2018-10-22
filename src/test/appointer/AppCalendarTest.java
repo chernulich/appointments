@@ -3,9 +3,14 @@ package appointer;
 import appointer.calendar.AppCalendar;
 import appointer.calendar.CalendarPrinter;
 import appointer.calendar.EventFacade;
+import appointer.commands.CmdAddEvent;
+import appointer.commands.CmdSetEventDuration;
+import appointer.commands.CmdSetEventRepeats;
 import appointer.user.AppUser;
 import appointer.user.User;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
+import biweekly.util.Duration;
 import biweekly.util.Frequency;
 
 public class AppCalendarTest {
@@ -13,9 +18,66 @@ public class AppCalendarTest {
 	// TODO: test methods for instance of AppCalendar
 	public static void main(String[] args) {
 
+		commandTest();
+
 		createJaneEventAndPrint();
 		
 		recurrenceDemo();
+		// next step is to try free busy test;
+	}
+
+	/**
+	 * Tests undo-redo functionality of the command pattern
+	 */
+	private static void commandTest() {
+		
+		AppCalendar appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+
+		VEvent event = EventFacade.createEventCurrentTime();
+
+		CmdAddEvent cmdAE = new CmdAddEvent(appCalendar, event);
+
+		cmdAE.execute();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		cmdAE.undo();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		cmdAE.execute();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		CmdSetEventDuration cmdSD = new CmdSetEventDuration(appCalendar, event, Duration.builder().hours(1).build());
+
+		cmdSD.execute();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		cmdSD.undo();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		cmdSD.execute();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		CmdSetEventRepeats cmdSR = new CmdSetEventRepeats(appCalendar, event, Frequency.DAILY);
+
+		cmdSR.execute();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		cmdSR.undo();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+
+		cmdSR.execute();
+
+		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		
+		System.out.println("Testing commands finished");
 	}
 
 	/**
@@ -28,11 +90,13 @@ public class AppCalendarTest {
 		EventFacade.setEventRepeats(vEventOne, Frequency.DAILY);
 
 		EventFacade.getLocalDateStream(vEventOne).limit(100).forEach(System.out::println);
-		
+
+		ICalendar calendar = new ICalendar();
+
+		AppCalendar.addBusy(calendar, vEventOne);
+
 		System.out.println("Recurring event display finished");
 	}
-
-
 
 	/**
 	 * Creates and prints an event belonging to user;
