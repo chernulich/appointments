@@ -8,7 +8,6 @@ import appointer.commands.CmdSetEventDuration;
 import appointer.commands.CmdSetEventRepeats;
 import appointer.user.AppUser;
 import appointer.user.User;
-import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.util.Duration;
 import biweekly.util.Frequency;
@@ -90,11 +89,7 @@ public class AppCalendarTest {
 		EventFacade.setEventRepeats(vEventOne, Frequency.DAILY);
 
 		EventFacade.getLocalDateStream(vEventOne).limit(100).forEach(System.out::println);
-
-		ICalendar calendar = new ICalendar();
-
-		AppCalendar.addBusy(calendar, vEventOne);
-
+		
 		System.out.println("Recurring event display finished");
 	}
 
