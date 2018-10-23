@@ -6,6 +6,6 @@ public interface ICalendarsLocal {
 
 	String getName();
 
-	ICalendar getLocalCalendar();
+	ICalendar getValue();
 
 }

@@ -1,4 +1,4 @@
-package appointer.calendar.single;
+package appointer.calendar.facades;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

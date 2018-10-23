@@ -16,13 +16,13 @@ public class CmdAddEvent implements AppCommand {
 	
 	@Override
 	public void execute() {
-		appCalendar.getLocalCalendar().addEvent(event);
+		appCalendar.getValue().addEvent(event);
 		executed = true;
 	}
 
 	@Override
 	public void undo() {
-		if (executed) appCalendar.getLocalCalendar().removeComponent(event);
+		if (executed) appCalendar.getValue().removeComponent(event);
 	}
 
 	// leaf node

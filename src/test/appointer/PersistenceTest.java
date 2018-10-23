@@ -3,7 +3,7 @@ package appointer;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import appointer.calendar.single.EventFacade;
+import appointer.calendar.facades.EventFacade;
 import appointer.util.io.disk.IOCalendarPersistence;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;

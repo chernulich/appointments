@@ -1,7 +1,7 @@
 package appointer.calendar.single;
 
-import appointer.calendar.single.EventFacade;
-import appointer.calendar.single.SingleCalendar;
+import appointer.calendar.allcalendars.CalendarStorage;
+import appointer.calendar.facades.EventFacade;
 import appointer.user.AppUser;
 import appointer.user.IUser;
 import appointer.util.io.console.CalendarPrinter;
@@ -45,7 +45,7 @@ public class EventFacadeTest {
 
 		IUser user = new AppUser("Jane Smith");
 
-		ICalendar appCalendar = SingleCalendar.getLocalCalendar(user.getName());
+		ICalendar appCalendar = CalendarStorage.getValueByName(user.getName());
 
 		VEvent vEventOne = EventFacade.createEventCurrentTime(); // we still might need an adapter;
 

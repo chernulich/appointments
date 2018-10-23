@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+import appointer.calendar.facades.EventFacade;
 import appointer.commands.AppCommand;
 import appointer.commands.CmdAddEvent;
 import appointer.commands.CmdRemoveEvent;
@@ -37,7 +38,7 @@ public class AppCommandsTestAuto {
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
-		final int eventsInit = appCalendar.getLocalCalendar().getEvents().size();
+		final int eventsInit = appCalendar.getValue().getEvents().size();
 		
 		VEvent event = EventFacade.createEventCurrentTime();
 
@@ -49,7 +50,7 @@ public class AppCommandsTestAuto {
 		
 		commands.stream().forEach(AppCommand::undo);
 
-		final List<VEvent> eventsEnd = appCalendar.getLocalCalendar().getEvents();
+		final List<VEvent> eventsEnd = appCalendar.getValue().getEvents();
 
 //		System.out.println("Rolled number of commands: " + commands.size());
 //
@@ -68,7 +69,7 @@ public class AppCommandsTestAuto {
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
-		final int eventsInit = appCalendar.getLocalCalendar().getEvents().size();
+		final int eventsInit = appCalendar.getValue().getEvents().size();
 		// need an immutable event + event list in order to compare pre/post event states;
 		
 		VEvent event = EventFacade.createEventCurrentTime();
@@ -91,7 +92,7 @@ public class AppCommandsTestAuto {
 		
 		commandsTrimmed.stream().forEach(AppCommand::undo);
 
-		final List<VEvent> eventsEnd = appCalendar.getLocalCalendar().getEvents();
+		final List<VEvent> eventsEnd = appCalendar.getValue().getEvents();
 
 		assertTrue(eventsEnd.size() == eventsInit);
 	}

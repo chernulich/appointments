@@ -21,12 +21,12 @@ public class CmdRemoveEvent implements AppCommand {
 	
 	@Override
 	public void execute() {
-		executed = appCalendar.getLocalCalendar().removeComponent(event);
+		executed = appCalendar.getValue().removeComponent(event);
 	}
 
 	@Override
 	public void undo() {
-		if (executed) appCalendar.getLocalCalendar().addEvent(event);
+		if (executed) appCalendar.getValue().addEvent(event);
 	}
 
 	// leaf node

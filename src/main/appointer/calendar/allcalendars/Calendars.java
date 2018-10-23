@@ -8,16 +8,16 @@ import biweekly.component.VEvent;
 import biweekly.property.Attendee;
 import biweekly.property.Organizer;
 
+// * localCalendar can be refactored off to oblivion
 /**
- * Class that brings together calendars;
- *
+ * Class that brings together calendars. 
+ * Responsible for creating and approving events across the network of app users;
  */
 public class Calendars {
 	
 	IUser user;
 	
 	ICalendarsLocal localCalendar; 
-	
 		
 	public Calendars(String name) {
 		user = new AppUser(name);
@@ -26,7 +26,7 @@ public class Calendars {
 	
 	public void AddRemoteUser(String name) {
 		if (name == user.getName()) throw new IllegalArgumentException();
-		SingleCalendar.getLocalCalendar(name);
+		CalendarStorage.getValueByName(name);
 	}
 	
 
@@ -38,17 +38,17 @@ public class Calendars {
 	public void addAppointment(String orgname) {
 		VEvent event = new VEvent();
 		event.addAttendee(new Attendee(user.getName(), ""));
-		localCalendar.getLocalCalendar().addEvent(event);
+		localCalendar.getValue().addEvent(event);
 		event.setOrganizer(new Organizer(orgname, ""));
 		//TODO: async approve in remote;
-		SingleCalendar.getLocalCalendar(orgname).addEvent(event);
+		CalendarStorage.getValueByName(orgname).addEvent(event);
 	}
 	
 	public void removeEvent(VEvent event) {
-		localCalendar.getLocalCalendar().removeComponent(event);
+		localCalendar.getValue().removeComponent(event);
 		String orgname = event.getOrganizer().getCommonName();
 		//TODO: async approve in remote;
-		SingleCalendar.getLocalCalendar(orgname).addEvent(event);
+		CalendarStorage.getValueByName(orgname).addEvent(event);
 	}
 	
 	public String toString() {

@@ -1,5 +1,6 @@
 package appointer.calendar.single;
 
+import appointer.calendar.facades.EventFacade;
 import appointer.commands.AppCommand;
 import appointer.commands.CmdAddEvent;
 import appointer.commands.CmdComposite;
@@ -42,15 +43,15 @@ public class AppCommandsTest {
 
 		cmdComposite.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdComposite.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdComposite.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		System.out.println("Testing composite command finished");
 
@@ -70,43 +71,43 @@ public class AppCommandsTest {
 
 		cmdAE.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdAE.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdAE.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		CmdSetEventDuration cmdSD = new CmdSetEventDuration(appCalendar, event, Duration.builder().hours(1).build());
 
 		cmdSD.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdSD.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdSD.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		CmdSetEventRepeats cmdSR = new CmdSetEventRepeats(appCalendar, event, Frequency.DAILY);
 
 		cmdSR.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdSR.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		cmdSR.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getValue());
 
 		System.out.println("Testing commands finished");
 	}

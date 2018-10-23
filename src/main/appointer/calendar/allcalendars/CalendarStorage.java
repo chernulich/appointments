@@ -18,13 +18,23 @@ public class CalendarStorage {
 	}
 
 	public static String toStaticString() {
-		return calendars.entrySet().stream().map(entry -> entry.getKey() + " - " + entry.getValue())
+		return getMap().entrySet().stream().map(entry -> entry.getKey() + " - " + entry.getValue())
         .collect(Collectors.joining());
 	}
 	
-	//We need a method that prints only the calendars relevant to the name;
+	//TODO: We need a method that prints only the calendars relevant to the name;
 	public static String toStaticString(String name) {
 		return null;
+	}
+
+	/**
+	 * Returns the local calendar for any application user;
+	 */
+	public static ICalendar getValueByName(String userName) {
+		if (getMap().get(userName) == null) {
+			getMap().put(userName, new ICalendar());
+		}
+		return getMap().get(userName);
 	}
 	
 	
