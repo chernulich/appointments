@@ -10,7 +10,7 @@ import biweekly.property.Organizer;
 
 // * localCalendar can be refactored off to oblivion
 /**
- * Class that brings together calendars. 
+ * Represents user, local calendar and all remote calendars; 
  * Responsible for creating and approving events across the network of app users;
  */
 public class Calendars {
@@ -29,10 +29,10 @@ public class Calendars {
 		CalendarStorage.getValueByName(name);
 	}
 	
-
+	// being refactored into command;
 	/**
 	 * Puts an event into local and remote calendars 
-	 * Preconditions: must 
+	 * TODO: preconditions;
 	 * @param orgname
 	 */
 	public void addAppointment(String orgname) {
@@ -40,8 +40,7 @@ public class Calendars {
 		event.addAttendee(new Attendee(user.getName(), ""));
 		localCalendar.getValue().addEvent(event);
 		event.setOrganizer(new Organizer(orgname, ""));
-		//TODO: async approve in remote;
-		CalendarStorage.getValueByName(orgname).addEvent(event);
+		
 	}
 	
 	public void removeEvent(VEvent event) {

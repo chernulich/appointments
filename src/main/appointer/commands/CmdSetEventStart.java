@@ -8,10 +8,10 @@ import biweekly.component.VEvent;
 
 public class CmdSetEventStart implements AppCommand {
 	
-	final ICalendarsLocal appCalendar;
-	final VEvent event;
-	LocalDate currentStart;
-	LocalDate previousStart; 
+	private final ICalendarsLocal appCalendar;
+	private final VEvent event;
+	private LocalDate currentStart;
+	private LocalDate previousStart; 
 	
 	public CmdSetEventStart(ICalendarsLocal appCalendar, VEvent event, LocalDate start) {
 		this.appCalendar = appCalendar;

@@ -1,33 +1,33 @@
 package appointer.commands;
 
+import java.util.List;
+
 import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
+import biweekly.property.Attendee;
 import biweekly.property.DurationProperty;
 import biweekly.util.Duration;
 
-public class CmdSetEventDuration implements AppCommand {
+public class CmdAddLocalAttendee implements AppCommand {
 	
 	private final ICalendarsLocal appCalendar;
 	private final VEvent event;  
-	private final Duration currentDuration;
-	private Duration previousDuration;
- 	
-	public CmdSetEventDuration(ICalendarsLocal appCalendar, VEvent event, Duration duration) {
+	private List<Attendee> currentAttendee;
+ 		
+	public CmdAddLocalAttendee(ICalendarsLocal appCalendar, VEvent event) {
 		this.appCalendar = appCalendar;
 		this.event = event;
-		this.currentDuration = duration;
 	}
 
 	@Override 
 	public void execute() {
-		DurationProperty durationProperty = event.getDuration();
-		previousDuration = durationProperty == null ? null : durationProperty.getValue() ;
-		event.setDuration(currentDuration);
+		currentAttendee = event.getAttendees();
+		event.addAttendee(new Attendee(appCalendar.getName(), ""));
 	}
 
 	@Override
 	public void undo() {
-		event.setDuration(previousDuration);
+		//TODO: remove Attendee
 	}
 	
 	// leaf node

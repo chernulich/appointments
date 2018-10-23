@@ -1,20 +1,11 @@
 package appointer.calendar.single;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-
 import appointer.calendar.allcalendars.CalendarStorage;
-import appointer.util.date.DateAdapter;
 import appointer.util.io.console.CalendarPrinter;
 import biweekly.ICalendar;
-import biweekly.component.VEvent;
-import biweekly.component.VFreeBusy;
-import biweekly.parameter.FreeBusyType;
-
 
 /**
- * Holds the root user and mutates CalendarStorage;
+ * Represents pair user-calendar;
  */
 public class SingleCalendar implements ICalendarsLocal {
 	/**

@@ -8,11 +8,11 @@ import biweekly.util.Recurrence;
 
 public class CmdSetEventRepeats implements AppCommand {
 	
-	final ICalendarsLocal appCalendar;
- 	final VEvent event; 
- 	final Frequency frequency;
-	RecurrenceRule currentRule;
-	RecurrenceRule previousRule;
+	private final ICalendarsLocal appCalendar;
+	private final VEvent event; 
+ 	private final Frequency frequency;
+ 	private RecurrenceRule currentRule;
+ 	private RecurrenceRule previousRule;
 	
 	
 	public CmdSetEventRepeats(ICalendarsLocal appCalendar, VEvent event, Frequency frequency) {

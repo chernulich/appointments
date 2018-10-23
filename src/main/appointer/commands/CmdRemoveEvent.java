@@ -10,9 +10,9 @@ import biweekly.component.VEvent;
  */
 public class CmdRemoveEvent implements AppCommand {
 
-	final ICalendarsLocal appCalendar;
-	final VEvent event;
-	boolean executed = false;
+	private final ICalendarsLocal appCalendar;
+	private final VEvent event;
+	private boolean executed = false;
 
 	public CmdRemoveEvent(ICalendarsLocal appCalendar, VEvent event) {
 		this.appCalendar = appCalendar;

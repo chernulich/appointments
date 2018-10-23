@@ -1,27 +1,29 @@
 package appointer.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
 
-import java.util.ArrayList;
-
-// next best thing is to make static factory for appCalendar and event;
-// you ask CmdAddEvent.class and get new CmdAddEvent(this.appCalendar, this.event)
-/**
- *  A list of commands that behaves as command;
- */
-public class CmdComposite implements AppCommand {
-
+public class CmdAddAppointment implements AppCommand {
+	
 	private final ICalendarsLocal appCalendar;
 	private final VEvent event; 
- 	private List<AppCommand> appCommands = new ArrayList<>();
- 
-	public CmdComposite(ICalendarsLocal appCalendar, VEvent event) {
+ 	private final String orgname;
+	private List<AppCommand> appCommands = new ArrayList<>();
+ 	
+	public CmdAddAppointment(ICalendarsLocal appCalendar, VEvent event, String organiser) {
 		this.appCalendar = appCalendar;
 		this.event = event;
+		this.orgname = organiser;
+		add(new CmdAddEvent(appCalendar, event));
+		add(new CmdAddLocalAttendee(appCalendar, event));
+		add(new CmdSetOrganiser(appCalendar, event, orgname));
+		//TODO: async approve in remote;		
+		//TODO: command for CalendarStorage.getValueByName(orgname).addEvent(event);
 	}
+
 	
 	public void add(AppCommand appCommand) {
 		appCommands.add(appCommand);

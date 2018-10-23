@@ -2,32 +2,30 @@ package appointer.commands;
 
 import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
-import biweekly.property.DurationProperty;
-import biweekly.util.Duration;
+import biweekly.property.Organizer;
 
-public class CmdSetEventDuration implements AppCommand {
+public class CmdSetOrganiser implements AppCommand {
 	
 	private final ICalendarsLocal appCalendar;
 	private final VEvent event;  
-	private final Duration currentDuration;
-	private Duration previousDuration;
- 	
-	public CmdSetEventDuration(ICalendarsLocal appCalendar, VEvent event, Duration duration) {
+	private final String currentOrgName;
+	private String previousOrgName;
+    
+	public CmdSetOrganiser(ICalendarsLocal appCalendar, VEvent event, String organiser) {
 		this.appCalendar = appCalendar;
 		this.event = event;
-		this.currentDuration = duration;
+		this.currentOrgName = organiser;
 	}
 
 	@Override 
 	public void execute() {
-		DurationProperty durationProperty = event.getDuration();
-		previousDuration = durationProperty == null ? null : durationProperty.getValue() ;
-		event.setDuration(currentDuration);
+		previousOrgName = event.getOrganizer().getCommonName();
+		event.setOrganizer(new Organizer(currentOrgName, ""));
 	}
 
 	@Override
 	public void undo() {
-		event.setDuration(previousDuration);
+		event.setOrganizer(new Organizer(previousOrgName, ""));
 	}
 	
 	// leaf node
