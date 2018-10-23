@@ -1,7 +1,6 @@
 package appointer.calendar;
 
 import appointer.calendar.AppCalendar;
-import appointer.calendar.CalendarPrinter;
 import appointer.calendar.EventFacade;
 import appointer.commands.AppCommand;
 import appointer.commands.CmdAddEvent;
@@ -9,6 +8,7 @@ import appointer.commands.CmdComposite;
 import appointer.commands.CmdSetEventDuration;
 import appointer.commands.CmdSetEventRepeats;
 import appointer.user.AppUser;
+import appointer.util.io.console.CalendarPrinter;
 import biweekly.component.VEvent;
 import biweekly.util.Duration;
 import biweekly.util.Frequency;
@@ -28,7 +28,7 @@ public class AppCommandsTest {
 	 * Tests composite command;
 	 */
 	private static void compositeCommandTest() {
-		AppCalendar appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
 
 		VEvent event = EventFacade.createEventCurrentTime();
 
@@ -64,7 +64,7 @@ public class AppCommandsTest {
 	@SuppressWarnings("unused")
 	private static void commandTest() {
 
-		AppCalendar appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
 
 		VEvent event = EventFacade.createEventCurrentTime();
 

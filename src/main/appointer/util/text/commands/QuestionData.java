@@ -1,16 +1,16 @@
-package appointer.ui.text.commands;
+package appointer.util.text.commands;
 
 import java.io.BufferedReader;
 
 /**
  * Stores question prompt and reader;
  */
-public class StringQuestionData extends CommonPromptData implements IPromptData {
+public class QuestionData extends PromptUntilExitData implements ITextQuestionData {
 	final String question;
 
-	public StringQuestionData(BufferedReader reader, String hint, String exitWord) {
+	public QuestionData(BufferedReader reader, String question, String exitWord) {
 		super(reader, exitWord);
-		this.question = hint;
+		this.question = question;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class StringQuestionData extends CommonPromptData implements IPromptData 
 	}
 
 	@Override
-	public String getHint() {
+	public String getQuestion() {
 		return question;
 	}
 

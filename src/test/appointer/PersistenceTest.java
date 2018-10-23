@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import appointer.calendar.EventFacade;
-import appointer.util.io.IOCalendarPersistence;
+import appointer.util.io.disk.IOCalendarPersistence;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 

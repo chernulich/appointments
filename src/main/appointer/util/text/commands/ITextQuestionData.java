@@ -1,15 +1,15 @@
-package appointer.ui.text.commands;
+package appointer.util.text.commands;
 
 import java.io.BufferedReader;
 
 /**
  * Auth data to drive AuthInput.readOneLine method
  */
-public interface IPromptData {
+public interface ITextQuestionData {
 
 	BufferedReader getReader();
 
-	String getHint();
+	String getQuestion();
 
 	String getExitWord();
 

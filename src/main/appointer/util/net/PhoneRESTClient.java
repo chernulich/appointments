@@ -5,7 +5,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import appointer.util.io.IO;
+import appointer.ui.text.dialogs.UserDialogPhone;
 
 
 /**
@@ -14,7 +14,7 @@ import appointer.util.io.IO;
 public class PhoneRESTClient {
 	
 	public static void sendPhone() {
-		String string = IO.phoneFromUser();
+		String string = UserDialogPhone.phoneFromUser();
 		try {
  
 			System.out.println(string);

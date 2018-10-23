@@ -17,7 +17,7 @@ import biweekly.parameter.FreeBusyType;
  * Wrapper over biweekly calendar; https://github.com/mangstadt/biweekly
  * biweekly won by comparison to older iCal4j library;
  */
-public class AppCalendar {
+public class AppCalendar implements IAppCal {
 	/**
 	 * Abstraction function: name, calendar -> AppCalendar
 	 */
@@ -45,17 +45,25 @@ public class AppCalendar {
 	 * @param appUser
 	 * @return
 	 */
-	public static AppCalendar getAppCalendar(User appUser) {
+	public static IAppCal getAppCalendar(User appUser) {
 		if (calendars.isEmpty()) {
 			calendars.add(new AppCalendar(appUser));
 		}
 		return calendars.get(0);
 	}
 
+	/* (non-Javadoc)
+	 * @see appointer.calendar.IAppCal#getName()
+	 */
+	@Override
 	public String getName() {
 		return user.getName();
 	}
 
+	/* (non-Javadoc)
+	 * @see appointer.calendar.IAppCal#getCalendar()
+	 */
+	@Override
 	public ICalendar getCalendar() {
 		return calendar;
 	}

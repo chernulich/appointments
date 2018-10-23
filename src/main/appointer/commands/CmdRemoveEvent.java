@@ -1,16 +1,16 @@
 package appointer.commands;
 
-import appointer.calendar.AppCalendar;
+import appointer.calendar.IAppCal;
 import biweekly.component.VEvent;
 
 public class CmdRemoveEvent implements AppCommand {
 
 
-	final AppCalendar appCalendar;
+	final IAppCal appCalendar;
 	final VEvent event;
 	boolean executed = false;
 
-	public CmdRemoveEvent(AppCalendar appCalendar, VEvent event) {
+	public CmdRemoveEvent(IAppCal appCalendar, VEvent event) {
 		this.appCalendar = appCalendar;
 		this.event = event;
 	}

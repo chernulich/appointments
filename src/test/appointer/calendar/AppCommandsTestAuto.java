@@ -34,7 +34,7 @@ public class AppCommandsTestAuto {
 	@Test
 	public void addRemoveExecRedo() {
 
-		AppCalendar appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
@@ -65,7 +65,7 @@ public class AppCommandsTestAuto {
 	@Test
 	public void randomExecRedo() {
 
-		AppCalendar appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
@@ -102,7 +102,7 @@ public class AppCommandsTestAuto {
 	 * @param appCalendar
 	 * @param NEvents
 	 */
-	private void addNEvents(AppCalendar appCalendar, int NEvents) {
+	private void addNEvents(IAppCal appCalendar, int NEvents) {
 
 		VEvent eventOne;
 
@@ -125,7 +125,7 @@ public class AppCommandsTestAuto {
 	 * @param event
 	 * @return
 	 */
-	private List<AppCommand> createTestCommandList(AppCalendar appCalendar, VEvent event) {
+	private List<AppCommand> createTestCommandList(IAppCal appCalendar, VEvent event) {
 		List<AppCommand> appCommands = new ArrayList<>();
 
 		appCommands.add(new CmdAddEvent(appCalendar, event));
@@ -156,7 +156,7 @@ public class AppCommandsTestAuto {
 	 * @param event
 	 * @return
 	 */
-	private List<AppCommand> createTestCommandAddRemove(AppCalendar appCalendar, VEvent event) {
+	private List<AppCommand> createTestCommandAddRemove(IAppCal appCalendar, VEvent event) {
 		List<AppCommand> appCommands = new ArrayList<>();
 
 		appCommands.add(new CmdAddEvent(appCalendar, event));

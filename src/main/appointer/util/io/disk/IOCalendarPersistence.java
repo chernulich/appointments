@@ -1,4 +1,4 @@
-package appointer.util.io;
+package appointer.util.io.disk;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package appointer.calendar;
+package appointer.util.io.console;
 
 import java.util.List;
 import java.util.Map.Entry;

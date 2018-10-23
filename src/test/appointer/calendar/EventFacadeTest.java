@@ -1,10 +1,10 @@
 package appointer.calendar;
 
 import appointer.calendar.AppCalendar;
-import appointer.calendar.CalendarPrinter;
 import appointer.calendar.EventFacade;
 import appointer.user.AppUser;
 import appointer.user.User;
+import appointer.util.io.console.CalendarPrinter;
 import biweekly.component.VEvent;
 import biweekly.util.Frequency;
 
@@ -41,7 +41,7 @@ public class EventFacadeTest {
 
 		User user = new AppUser("Jane Smith");
 
-		AppCalendar appCalendar = AppCalendar.getAppCalendar(user);
+		IAppCal appCalendar = AppCalendar.getAppCalendar(user);
 
 		VEvent vEventOne = EventFacade.createEventCurrentTime(); // we still might need an adapter;
 
