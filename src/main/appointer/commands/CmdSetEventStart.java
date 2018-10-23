@@ -29,5 +29,19 @@ public class CmdSetEventStart implements AppCommand {
 	public void undo() {
 		event.setDateStart(DateAdapter.asDate(previousStart));
 	}
+	
+	// leaf node
+	@Override
+	public void add(AppCommand appCommand) {
+	}
+
+	@Override
+	public void remove(AppCommand appCommand) {
+	}
+
+	@Override
+	public AppCommand getChild(int i) {
+		return new CmdEmpty();
+	}
 
 }

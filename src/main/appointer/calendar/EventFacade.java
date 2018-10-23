@@ -18,12 +18,12 @@ import biweekly.util.Recurrence;
 import biweekly.util.com.google.ical.compat.javautil.DateIterator;
 
 public class EventFacade {
-	// Facade over VEvent;
-	// try event composite class to hold events and call this;
-
+	
+	// is that a future event composite class to hold events and call groups of them?
 	/**
 	 * VEvent is the Biweekly implementation of calendar event; creating VEvent for
 	 * now;
+	 * EventFacade is the facade over VEvent + helper methods;
 	 */
 	public static VEvent createEventCurrentTime() {
 		VEvent vEventOne = new VEvent();

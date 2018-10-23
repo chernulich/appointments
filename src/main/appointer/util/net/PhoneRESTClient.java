@@ -1,7 +1,5 @@
 package appointer.util.net;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
@@ -9,12 +7,10 @@ import java.net.URLConnection;
 
 import appointer.util.io.IO;
 
- 
+
 /**
- * @author Crunchify.com
- * 
+ * Tests connecting to the server, passes phone number to validate;
  */
- 
 public class PhoneRESTClient {
 	
 	public static void sendPhone() {

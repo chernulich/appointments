@@ -30,5 +30,19 @@ public class CmdSetEventDuration implements AppCommand {
 	public void undo() {
 		event.setDuration(previousDuration);
 	}
+	
+	// leaf node
+	@Override
+	public void add(AppCommand appCommand) {
+	}
+
+	@Override
+	public void remove(AppCommand appCommand) {
+	}
+
+	@Override
+	public AppCommand getChild(int i) {
+		return new CmdEmpty();
+	}
 
 }

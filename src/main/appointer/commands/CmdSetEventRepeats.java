@@ -33,5 +33,19 @@ public class CmdSetEventRepeats implements AppCommand {
 	public void undo() {
 		event.setRecurrenceRule(previousRule);
 	}
+	
+	// leaf node
+	@Override
+	public void add(AppCommand appCommand) {
+	}
+
+	@Override
+	public void remove(AppCommand appCommand) {
+	}
+
+	@Override
+	public AppCommand getChild(int i) {
+		return new CmdEmpty();
+	}
 
 }
