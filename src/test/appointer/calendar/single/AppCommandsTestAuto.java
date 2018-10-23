@@ -1,4 +1,4 @@
-package appointer.calendar;
+package appointer.calendar.single;
 
 import static org.junit.Assert.assertTrue;
 
@@ -20,6 +20,7 @@ import appointer.commands.CmdSetEventDuration;
 import appointer.commands.CmdSetEventRepeats;
 import appointer.commands.CmdSetEventStart;
 import appointer.user.AppUser;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.util.Duration;
 import biweekly.util.Frequency;
@@ -34,11 +35,11 @@ public class AppCommandsTestAuto {
 	@Test
 	public void addRemoveExecRedo() {
 
-		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
-		final int eventsInit = appCalendar.getCalendar().getEvents().size();
+		final int eventsInit = appCalendar.getLocalCalendar().getEvents().size();
 		
 		VEvent event = EventFacade.createEventCurrentTime();
 
@@ -50,7 +51,7 @@ public class AppCommandsTestAuto {
 		
 		commands.stream().forEach(AppCommand::undo);
 
-		final List<VEvent> eventsEnd = appCalendar.getCalendar().getEvents();
+		final List<VEvent> eventsEnd = appCalendar.getLocalCalendar().getEvents();
 
 //		System.out.println("Rolled number of commands: " + commands.size());
 //
@@ -65,11 +66,11 @@ public class AppCommandsTestAuto {
 	@Test
 	public void randomExecRedo() {
 
-		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
-		final int eventsInit = appCalendar.getCalendar().getEvents().size();
+		final int eventsInit = appCalendar.getLocalCalendar().getEvents().size();
 		// need an immutable event + event list in order to compare pre/post event states;
 		
 		VEvent event = EventFacade.createEventCurrentTime();
@@ -92,7 +93,7 @@ public class AppCommandsTestAuto {
 		
 		commandsTrimmed.stream().forEach(AppCommand::undo);
 
-		final List<VEvent> eventsEnd = appCalendar.getCalendar().getEvents();
+		final List<VEvent> eventsEnd = appCalendar.getLocalCalendar().getEvents();
 
 		assertTrue(eventsEnd.size() == eventsInit);
 	}
@@ -102,7 +103,7 @@ public class AppCommandsTestAuto {
 	 * @param appCalendar
 	 * @param NEvents
 	 */
-	private void addNEvents(IAppCal appCalendar, int NEvents) {
+	private void addNEvents(ICalendarsLocal appCalendar, int NEvents) {
 
 		VEvent eventOne;
 
@@ -125,7 +126,7 @@ public class AppCommandsTestAuto {
 	 * @param event
 	 * @return
 	 */
-	private List<AppCommand> createTestCommandList(IAppCal appCalendar, VEvent event) {
+	private List<AppCommand> createTestCommandList(ICalendarsLocal appCalendar, VEvent event) {
 		List<AppCommand> appCommands = new ArrayList<>();
 
 		appCommands.add(new CmdAddEvent(appCalendar, event));
@@ -156,7 +157,7 @@ public class AppCommandsTestAuto {
 	 * @param event
 	 * @return
 	 */
-	private List<AppCommand> createTestCommandAddRemove(IAppCal appCalendar, VEvent event) {
+	private List<AppCommand> createTestCommandAddRemove(ICalendarsLocal appCalendar, VEvent event) {
 		List<AppCommand> appCommands = new ArrayList<>();
 
 		appCommands.add(new CmdAddEvent(appCalendar, event));

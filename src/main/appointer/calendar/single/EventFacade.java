@@ -1,4 +1,4 @@
-package appointer.calendar;
+package appointer.calendar.single;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,6 +23,8 @@ public class EventFacade {
 	/**
 	 * VEvent is the Biweekly implementation of calendar event; creating VEvent for
 	 * now;
+	 * https://github.com/mangstadt/biweekly
+	 * biweekly won by comparison to older iCal4j library;
 	 * EventFacade is the facade over VEvent + helper methods;
 	 */
 	public static VEvent createEventCurrentTime() {

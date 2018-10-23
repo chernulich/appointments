@@ -5,7 +5,7 @@ import appointer.util.net.NamesRESTClient;
 /**
  * User class
  */
-public class AppUser implements User {
+public class AppUser implements IUser {
 
 	private final String name;
 

@@ -3,6 +3,6 @@ package appointer.user;
 /**
  * Mock User interface
  */
-public interface User {
+public interface IUser {
 	public String getName();
 }

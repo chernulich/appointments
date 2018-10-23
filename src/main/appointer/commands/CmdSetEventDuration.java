@@ -1,18 +1,18 @@
 package appointer.commands;
 
-import appointer.calendar.IAppCal;
+import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
 import biweekly.property.DurationProperty;
 import biweekly.util.Duration;
 
 public class CmdSetEventDuration implements AppCommand {
 	
-	final IAppCal appCalendar;
+	final ICalendarsLocal appCalendar;
  	final VEvent event;  
  	final Duration currentDuration;
 	Duration previousDuration;
  	
-	public CmdSetEventDuration(IAppCal appCalendar, VEvent event, Duration duration) {
+	public CmdSetEventDuration(ICalendarsLocal appCalendar, VEvent event, Duration duration) {
 		this.appCalendar = appCalendar;
 		this.event = event;
 		this.currentDuration = duration;

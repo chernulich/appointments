@@ -1,12 +1,17 @@
-package appointer.calendar;
+package appointer.calendar.single;
 
-import appointer.calendar.AppCalendar;
-import appointer.calendar.EventFacade;
+import appointer.calendar.single.EventFacade;
+import appointer.calendar.single.ICalendarsLocal;
+import appointer.calendar.single.SingleCalendar;
 import appointer.user.AppUser;
-import appointer.user.User;
+import appointer.user.IUser;
 import appointer.util.io.console.CalendarPrinter;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.util.Frequency;
+
+
+// add to tests that a localtime free/busy;
 
 public class EventFacadeTest {
 
@@ -39,17 +44,17 @@ public class EventFacadeTest {
 	 */
 	public static void createJaneEventAndPrint() {
 
-		User user = new AppUser("Jane Smith");
+		IUser user = new AppUser("Jane Smith");
 
-		IAppCal appCalendar = AppCalendar.getAppCalendar(user);
+		ICalendar appCalendar = SingleCalendar.getLocalCalendar(user);
 
 		VEvent vEventOne = EventFacade.createEventCurrentTime(); // we still might need an adapter;
 
 		EventFacade.setOrganiser(vEventOne, user.getName());
 
-		appCalendar.getCalendar().addEvent(vEventOne);
+		appCalendar.addEvent(vEventOne);
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar);
 
 		System.out.println("Event display finished");
 	}

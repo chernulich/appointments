@@ -1,14 +1,14 @@
 package appointer.commands;
 
-import appointer.calendar.IAppCal;
+import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
 
 public class CmdCreateEvent implements AppCommand {
 	
-	final IAppCal appCalendar;
+	final ICalendarsLocal appCalendar;
  	VEvent event; 
 	
-	public CmdCreateEvent(IAppCal appCalendar) {
+	public CmdCreateEvent(ICalendarsLocal appCalendar) {
 		this.appCalendar = appCalendar;
 	}
 

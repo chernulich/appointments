@@ -2,6 +2,7 @@ package appointer.util.io.console;
 
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import biweekly.ICalendar;
@@ -16,7 +17,12 @@ public class CalendarPrinter {
 	 * @param calendar
 	 */
 	public static void printCalendar(ICalendar calendar) {
-		Stream.of(calendar.getEvents()).forEach(System.out::println);
+		System.out.println(ICalendarToString(calendar));
+	}
+	
+	public static String ICalendarToString(ICalendar calendar) {
+		return Stream.of(calendar.getEvents())
+				.map(e -> e.toString()).collect(Collectors.joining());
 	}
 
 	/**

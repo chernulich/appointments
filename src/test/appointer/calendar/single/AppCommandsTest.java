@@ -1,7 +1,5 @@
-package appointer.calendar;
+package appointer.calendar.single;
 
-import appointer.calendar.AppCalendar;
-import appointer.calendar.EventFacade;
 import appointer.commands.AppCommand;
 import appointer.commands.CmdAddEvent;
 import appointer.commands.CmdComposite;
@@ -28,7 +26,8 @@ public class AppCommandsTest {
 	 * Tests composite command;
 	 */
 	private static void compositeCommandTest() {
-		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		
+		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
 
 		VEvent event = EventFacade.createEventCurrentTime();
 
@@ -44,15 +43,15 @@ public class AppCommandsTest {
 
 		cmdComposite.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdComposite.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdComposite.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		System.out.println("Testing composite command finished");
 
@@ -64,7 +63,7 @@ public class AppCommandsTest {
 	@SuppressWarnings("unused")
 	private static void commandTest() {
 
-		IAppCal appCalendar = AppCalendar.getAppCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
 
 		VEvent event = EventFacade.createEventCurrentTime();
 
@@ -72,43 +71,43 @@ public class AppCommandsTest {
 
 		cmdAE.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdAE.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdAE.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		CmdSetEventDuration cmdSD = new CmdSetEventDuration(appCalendar, event, Duration.builder().hours(1).build());
 
 		cmdSD.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdSD.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdSD.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		CmdSetEventRepeats cmdSR = new CmdSetEventRepeats(appCalendar, event, Frequency.DAILY);
 
 		cmdSR.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdSR.undo();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		cmdSR.execute();
 
-		CalendarPrinter.printCalendar(appCalendar.getCalendar());
+		CalendarPrinter.printCalendar(appCalendar.getLocalCalendar());
 
 		System.out.println("Testing commands finished");
 	}

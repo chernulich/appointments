@@ -1,71 +1,65 @@
-package appointer.calendar;
+package appointer.calendar.single;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import appointer.user.User;
+import appointer.user.IUser;
 import appointer.util.date.DateAdapter;
+import appointer.util.io.console.CalendarPrinter;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
 
 /**
- * Wrapper over biweekly calendar; https://github.com/mangstadt/biweekly
- * biweekly won by comparison to older iCal4j library;
+ * Holds a map of users and SingleCalendars;
  */
-public class AppCalendar implements IAppCal {
+public class SingleCalendar implements ICalendarsLocal {
 	/**
-	 * Abstraction function: name, calendar -> AppCalendar
+	 * Abstraction function: name, calendars -> ICalendar
 	 */
 	/**
-	 * Rep invariant: user and calendar not null;
-	 * 0 <= calendars.size <= 1;
+	 * Rep invariant: user and calendars not null;
 	 */
-	private final User user;
-	private final ICalendar calendar;
-	private static final List<AppCalendar> calendars = new ArrayList<AppCalendar>();
+	private final IUser user;
+	private static final Map<IUser, ICalendar> calendars = new HashMap<>();
 
 	/**
 	 * @param appUser
 	 */
-	private AppCalendar(User appUser) {
+	public SingleCalendar(IUser appUser) {
 		if (appUser == null)
 			throw new IllegalArgumentException();
 		user = appUser;
-		calendar = new ICalendar();
 	}
 
 	/**
-	 * Singleton static factory
+	 * Returns the local calendar for any application user;
 	 * 
 	 * @param appUser
 	 * @return
 	 */
-	public static IAppCal getAppCalendar(User appUser) {
-		if (calendars.isEmpty()) {
-			calendars.add(new AppCalendar(appUser));
+	public static ICalendar getLocalCalendar(IUser appUser) {
+		if (calendars.get(appUser) == null) {
+			calendars.put(appUser, new ICalendar());
 		}
-		return calendars.get(0);
+		return calendars.get(appUser);
 	}
 
-	/* (non-Javadoc)
-	 * @see appointer.calendar.IAppCal#getName()
-	 */
 	@Override
 	public String getName() {
 		return user.getName();
 	}
 
-	/* (non-Javadoc)
-	 * @see appointer.calendar.IAppCal#getCalendar()
-	 */
 	@Override
-	public ICalendar getCalendar() {
-		return calendar;
+	/**
+	 * Returns the local calendar for the default user
+	 */
+	public ICalendar getLocalCalendar() {
+		return getLocalCalendar(user);
 	}
 
 	/**
@@ -78,7 +72,7 @@ public class AppCalendar implements IAppCal {
 	// does too much, has to refactor;
 	// event transparency exist;
 	// works only in case of non-repeating event
-	public static void addBusy(ICalendar calendar, VEvent event) {
+	public void addBusy(ICalendar calendar, VEvent event) {
 		VFreeBusy freebusy = new VFreeBusy();
 		Date start = event.getDateStart().getValue();
 		Date end = DateAdapter.asDate( // null pointer if no duration
@@ -87,12 +81,17 @@ public class AppCalendar implements IAppCal {
 		calendar.addFreeBusy(freebusy);
 	}
 
-	public static boolean checkBusy(ICalendar calendar, LocalDateTime startTime, LocalDateTime endTime) {
+	public boolean checkBusy(ICalendar calendar, LocalDateTime startTime, LocalDateTime endTime) {
 		return false;
 	}
 
-	public static boolean checkBusy(ICalendar calendar, LocalDateTime time) {
+	public boolean checkBusy(ICalendar calendar, LocalDateTime time) {
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Calendar of " + user.getName() + "\n" + CalendarPrinter.ICalendarToString(this.getLocalCalendar());
 	}
 
 }
