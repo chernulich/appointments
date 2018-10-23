@@ -3,6 +3,7 @@ package appointer.calendar;
 import appointer.calendar.AppCalendar;
 import appointer.calendar.CalendarPrinter;
 import appointer.calendar.EventFacade;
+import appointer.commands.AppCommand;
 import appointer.commands.CmdAddEvent;
 import appointer.commands.CmdComposite;
 import appointer.commands.CmdSetEventDuration;
@@ -18,11 +19,11 @@ import biweekly.util.Frequency;
 public class AppCommandsTest {
 
 	public static void main(String[] args) {
-	
+
 		compositeCommandTest();
 		// next step is to try free busy test; or something like the command queue;
 	}
-
+	
 	/**
 	 * Tests composite command;
 	 */
@@ -31,7 +32,7 @@ public class AppCommandsTest {
 
 		VEvent event = EventFacade.createEventCurrentTime();
 
-		CmdComposite cmdComposite = new CmdComposite(appCalendar, event);
+		AppCommand cmdComposite = new CmdComposite(appCalendar, event);
 
 		cmdComposite.add(new CmdAddEvent(appCalendar, event));
 

@@ -3,26 +3,26 @@ package appointer.commands;
 import appointer.calendar.AppCalendar;
 import biweekly.component.VEvent;
 
-public class CmdAddEvent implements AppCommand {
+public class CmdRemoveEvent implements AppCommand {
+
 
 	final AppCalendar appCalendar;
 	final VEvent event;
 	boolean executed = false;
 
-	public CmdAddEvent(AppCalendar appCalendar, VEvent event) {
+	public CmdRemoveEvent(AppCalendar appCalendar, VEvent event) {
 		this.appCalendar = appCalendar;
 		this.event = event;
 	}
 	
 	@Override
 	public void execute() {
-		appCalendar.getCalendar().addEvent(event);
-		executed = true;
+		executed = appCalendar.getCalendar().removeComponent(event);
 	}
 
 	@Override
 	public void undo() {
-		if (executed) appCalendar.getCalendar().removeComponent(event);
+		if (executed) appCalendar.getCalendar().addEvent(event);
 	}
 
 	// leaf node
@@ -38,5 +38,6 @@ public class CmdAddEvent implements AppCommand {
 	public AppCommand getChild(int i) {
 		return new CmdEmpty();
 	}
+
 
 }
