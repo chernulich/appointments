@@ -14,8 +14,12 @@ import biweekly.component.VEvent;
 import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
 
+
+//The class originally was static singleton,
+//but the need to support remote users transformed it 
 /**
- * Holds a map of users and SingleCalendars;
+ * Static part holds a map of users and SingleCalendars;
+ * Instance part holds the local user;
  */
 public class SingleCalendar implements ICalendarsLocal {
 	/**
@@ -28,15 +32,6 @@ public class SingleCalendar implements ICalendarsLocal {
 	private static final Map<IUser, ICalendar> calendars = new HashMap<>();
 
 	/**
-	 * @param appUser
-	 */
-	public SingleCalendar(IUser appUser) {
-		if (appUser == null)
-			throw new IllegalArgumentException();
-		user = appUser;
-	}
-
-	/**
 	 * Returns the local calendar for any application user;
 	 * 
 	 * @param appUser
@@ -47,6 +42,15 @@ public class SingleCalendar implements ICalendarsLocal {
 			calendars.put(appUser, new ICalendar());
 		}
 		return calendars.get(appUser);
+	}
+	
+	/**
+	 * @param appUser
+	 */
+	public SingleCalendar(IUser appUser) {
+		if (appUser == null)
+			throw new IllegalArgumentException();
+		user = appUser;
 	}
 
 	@Override
@@ -61,6 +65,12 @@ public class SingleCalendar implements ICalendarsLocal {
 	public ICalendar getLocalCalendar() {
 		return getLocalCalendar(user);
 	}
+	
+	@Override
+	public String toString() {
+		return "Calendar of " + user.getName() + "\n" + CalendarPrinter.ICalendarToString(this.getLocalCalendar());
+	}
+
 
 	/**
 	 * Reads time of start and end of event and then creates and adds to calendar an
@@ -72,7 +82,7 @@ public class SingleCalendar implements ICalendarsLocal {
 	// does too much, has to refactor;
 	// event transparency exist;
 	// works only in case of non-repeating event
-	public void addBusy(ICalendar calendar, VEvent event) {
+	public static void addBusy(ICalendar calendar, VEvent event) {
 		VFreeBusy freebusy = new VFreeBusy();
 		Date start = event.getDateStart().getValue();
 		Date end = DateAdapter.asDate( // null pointer if no duration
@@ -81,17 +91,13 @@ public class SingleCalendar implements ICalendarsLocal {
 		calendar.addFreeBusy(freebusy);
 	}
 
-	public boolean checkBusy(ICalendar calendar, LocalDateTime startTime, LocalDateTime endTime) {
+	public static boolean checkBusy(ICalendar calendar, LocalDateTime startTime, LocalDateTime endTime) {
 		return false;
 	}
 
-	public boolean checkBusy(ICalendar calendar, LocalDateTime time) {
+	public static boolean checkBusy(ICalendar calendar, LocalDateTime time) {
 		return false;
 	}
 
-	@Override
-	public String toString() {
-		return "Calendar of " + user.getName() + "\n" + CalendarPrinter.ICalendarToString(this.getLocalCalendar());
-	}
 
 }

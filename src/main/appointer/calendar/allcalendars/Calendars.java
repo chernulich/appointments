@@ -17,7 +17,7 @@ public class Calendars {
 	
 	IUser user;
 	
-	ICalendarsLocal localCalendar;
+	ICalendarsLocal localCalendar; 
 	
 	Map<String, ICalendar> remoteCalendars = new HashMap<>();
 	
