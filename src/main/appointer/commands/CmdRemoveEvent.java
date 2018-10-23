@@ -3,8 +3,12 @@ package appointer.commands;
 import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
 
+/**
+ * 
+ * Removing event from local user's calendar;
+ *
+ */
 public class CmdRemoveEvent implements AppCommand {
-
 
 	final ICalendarsLocal appCalendar;
 	final VEvent event;

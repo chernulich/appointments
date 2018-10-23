@@ -2,7 +2,9 @@ package appointer.commands;
 
 /**
  * Commands for the calendar;
- * uses Compoiste pattern
+ * uses Composite pattern;
+ * Each command stores the event it was applied on;
+ * Each command stores the ICalendarsLocal object;
  */
 public interface AppCommand {
 	public void execute();

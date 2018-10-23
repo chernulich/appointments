@@ -21,7 +21,6 @@ public class CmdSetEventDuration implements AppCommand {
 	@Override 
 	public void execute() {
 		DurationProperty durationProperty = event.getDuration();
-		
 		previousDuration = durationProperty == null ? null : durationProperty.getValue() ;
 		event.setDuration(currentDuration);
 	}

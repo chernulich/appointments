@@ -5,7 +5,6 @@ import appointer.commands.CmdAddEvent;
 import appointer.commands.CmdComposite;
 import appointer.commands.CmdSetEventDuration;
 import appointer.commands.CmdSetEventRepeats;
-import appointer.user.AppUser;
 import appointer.util.io.console.CalendarPrinter;
 import biweekly.component.VEvent;
 import biweekly.util.Duration;
@@ -27,7 +26,7 @@ public class AppCommandsTest {
 	 */
 	private static void compositeCommandTest() {
 		
-		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar("Alyssa P. Hacker");
 
 		VEvent event = EventFacade.createEventCurrentTime();
 
@@ -63,7 +62,7 @@ public class AppCommandsTest {
 	@SuppressWarnings("unused")
 	private static void commandTest() {
 
-		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar("Alyssa P. Hacker");
 
 		VEvent event = EventFacade.createEventCurrentTime();
 

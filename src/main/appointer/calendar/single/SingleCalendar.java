@@ -3,10 +3,8 @@ package appointer.calendar.single;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-import appointer.user.IUser;
+import appointer.calendar.allcalendars.CalendarStorage;
 import appointer.util.date.DateAdapter;
 import appointer.util.io.console.CalendarPrinter;
 import biweekly.ICalendar;
@@ -15,11 +13,8 @@ import biweekly.component.VFreeBusy;
 import biweekly.parameter.FreeBusyType;
 
 
-//The class originally was static singleton,
-//but the need to support remote users transformed it 
 /**
- * Static part holds a map of users and SingleCalendars;
- * Instance part holds the local user;
+ * Holds the root user and mutates CalendarStorage;
  */
 public class SingleCalendar implements ICalendarsLocal {
 	/**
@@ -28,34 +23,33 @@ public class SingleCalendar implements ICalendarsLocal {
 	/**
 	 * Rep invariant: user and calendars not null;
 	 */
-	private final IUser user;
-	private static final Map<IUser, ICalendar> calendars = new HashMap<>();
-
+	private final String userName;
+	
 	/**
 	 * Returns the local calendar for any application user;
 	 * 
 	 * @param appUser
 	 * @return
 	 */
-	public static ICalendar getLocalCalendar(IUser appUser) {
-		if (calendars.get(appUser) == null) {
-			calendars.put(appUser, new ICalendar());
+	public static ICalendar getLocalCalendar(String userName) {
+		if (CalendarStorage.getMap().get(userName) == null) {
+			CalendarStorage.getMap().put(userName, new ICalendar());
 		}
-		return calendars.get(appUser);
+		return CalendarStorage.getMap().get(userName);
 	}
 	
 	/**
-	 * @param appUser
+	 * @param name
 	 */
-	public SingleCalendar(IUser appUser) {
-		if (appUser == null)
+	public SingleCalendar(String name) {
+		if (name == null)
 			throw new IllegalArgumentException();
-		user = appUser;
+		userName = name;
 	}
 
 	@Override
 	public String getName() {
-		return user.getName();
+		return userName;
 	}
 
 	@Override
@@ -63,12 +57,12 @@ public class SingleCalendar implements ICalendarsLocal {
 	 * Returns the local calendar for the default user
 	 */
 	public ICalendar getLocalCalendar() {
-		return getLocalCalendar(user);
+		return getLocalCalendar(userName);
 	}
 	
 	@Override
 	public String toString() {
-		return "Calendar of " + user.getName() + "\n" + CalendarPrinter.ICalendarToString(this.getLocalCalendar());
+		return "Calendar of " + userName + "\n" + CalendarPrinter.ICalendarToString(this.getLocalCalendar());
 	}
 
 

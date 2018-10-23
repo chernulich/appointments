@@ -19,8 +19,6 @@ import appointer.commands.CmdRemoveEvent;
 import appointer.commands.CmdSetEventDuration;
 import appointer.commands.CmdSetEventRepeats;
 import appointer.commands.CmdSetEventStart;
-import appointer.user.AppUser;
-import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.util.Duration;
 import biweekly.util.Frequency;
@@ -35,7 +33,7 @@ public class AppCommandsTestAuto {
 	@Test
 	public void addRemoveExecRedo() {
 
-		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar("Alyssa P. Hacker");
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
@@ -66,7 +64,7 @@ public class AppCommandsTestAuto {
 	@Test
 	public void randomExecRedo() {
 
-		ICalendarsLocal appCalendar = new SingleCalendar(new AppUser("Alyssa P. Hacker"));
+		ICalendarsLocal appCalendar = new SingleCalendar("Alyssa P. Hacker");
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
