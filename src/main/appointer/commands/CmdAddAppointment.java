@@ -24,7 +24,7 @@ public class CmdAddAppointment implements AppCommand {
 		//TODO: command for CalendarStorage.getValueByName(orgname).addEvent(event);
 	}
 
-	
+	//total need of safe copying here original command must be referenced to keep remove() working;
 	public void add(AppCommand appCommand) {
 		appCommands.add(appCommand);
 	}
