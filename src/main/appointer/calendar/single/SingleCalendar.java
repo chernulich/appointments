@@ -4,8 +4,9 @@ import appointer.calendar.allcalendars.CalendarStorage;
 import appointer.util.io.console.CalendarPrinter;
 import biweekly.ICalendar;
 
+//should be refactored to oblivion as logically importaint user-calendar relations are in the Calendars map;
 /**
- * Represents pair user-calendar;
+ * Represents pair user-calendar; 
  */
 public class SingleCalendar implements ICalendarsLocal {
 	/**
