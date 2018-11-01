@@ -8,6 +8,7 @@ import biweekly.ICalendar;
 
 /**
  * Static map for all ICalendars on the local system
+ * rep exposure; not threadsafe; 
  */
 public class CalendarStorage {
 
