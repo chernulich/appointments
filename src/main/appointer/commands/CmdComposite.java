@@ -14,13 +14,9 @@ import java.util.ArrayList;
  */
 public class CmdComposite implements AppCommand {
 
-	private final ICalendar appCalendar;
-	private final VEvent event; 
- 	private List<AppCommand> appCommands = new ArrayList<>();
+	protected List<AppCommand> appCommands = new ArrayList<>();
  
-	public CmdComposite(ICalendar appCalendar, VEvent event) {
-		this.appCalendar = appCalendar;
-		this.event = event;
+	public CmdComposite() {
 	}
 	
 	public void add(AppCommand appCommand) {

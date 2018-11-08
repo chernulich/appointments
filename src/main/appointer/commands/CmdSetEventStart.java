@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import appointer.util.date.DateAdapter;
 import biweekly.component.VEvent;
 
-public class CmdSetEventStart implements AppCommand {
+public class CmdSetEventStart extends CmdLeaf implements AppCommand {
 	
 	private final VEvent event;
 	private LocalDate currentStart;
@@ -26,19 +26,4 @@ public class CmdSetEventStart implements AppCommand {
 	public void undo() {
 		event.setDateStart(DateAdapter.asDate(previousStart));
 	}
-	
-	// leaf node
-	@Override
-	public void add(AppCommand appCommand) {
-	}
-
-	@Override
-	public void remove(AppCommand appCommand) {
-	}
-
-	@Override
-	public AppCommand getChild(int i) {
-		return new CmdEmpty();
-	}
-
 }

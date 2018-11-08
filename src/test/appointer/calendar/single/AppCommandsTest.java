@@ -35,7 +35,7 @@ public class AppCommandsTest {
 
 		VEvent event = EventFacade.createEventCurrentTime();
 
-		AppCommand cmdComposite = new CmdComposite(appCalendar, event);
+		AppCommand cmdComposite = new CmdComposite();
 
 		cmdComposite.add(new CmdAddEvent(appCalendar, event));
 

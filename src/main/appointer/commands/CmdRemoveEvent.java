@@ -9,7 +9,7 @@ import biweekly.component.VEvent;
  * Removing event from local user's calendar;
  *
  */
-public class CmdRemoveEvent implements AppCommand {
+public class CmdRemoveEvent extends CmdLeaf implements AppCommand {
 
 	private final ICalendar appCalendar;
 	private final VEvent event;
@@ -29,20 +29,4 @@ public class CmdRemoveEvent implements AppCommand {
 	public void undo() {
 		if (executed) appCalendar.addEvent(event);
 	}
-
-	// leaf node
-	@Override
-	public void add(AppCommand appCommand) {
-	}
-
-	@Override
-	public void remove(AppCommand appCommand) {
-	}
-
-	@Override
-	public AppCommand getChild(int i) {
-		return new CmdEmpty();
-	}
-
-
 }

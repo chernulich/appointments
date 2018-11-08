@@ -3,7 +3,7 @@ package appointer.commands;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
-public class CmdAddEvent implements AppCommand {
+public class CmdAddEvent extends CmdLeaf implements AppCommand {
 
 	private final ICalendar appCalendar;
 	private final VEvent event;
@@ -25,18 +25,5 @@ public class CmdAddEvent implements AppCommand {
 		if (executed) appCalendar.removeComponent(event);
 	}
 
-	// leaf node
-	@Override
-	public void add(AppCommand appCommand) {
-	}
-
-	@Override
-	public void remove(AppCommand appCommand) {
-	}
-
-	@Override
-	public AppCommand getChild(int i) {
-		return new CmdEmpty();
-	}
 
 }

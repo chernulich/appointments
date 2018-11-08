@@ -5,7 +5,7 @@ import biweekly.property.RecurrenceRule;
 import biweekly.util.Frequency;
 import biweekly.util.Recurrence;
 
-public class CmdSetEventRepeats implements AppCommand {
+public class CmdSetEventRepeats  extends CmdLeaf implements AppCommand {
 	
 	private final VEvent event; 
  	private final Frequency frequency;
@@ -30,19 +30,4 @@ public class CmdSetEventRepeats implements AppCommand {
 	public void undo() {
 		event.setRecurrenceRule(previousRule);
 	}
-	
-	// leaf node
-	@Override
-	public void add(AppCommand appCommand) {
-	}
-
-	@Override
-	public void remove(AppCommand appCommand) {
-	}
-
-	@Override
-	public AppCommand getChild(int i) {
-		return new CmdEmpty();
-	}
-
 }
