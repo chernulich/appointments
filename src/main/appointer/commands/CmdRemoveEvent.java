@@ -1,6 +1,7 @@
 package appointer.commands;
 
-import appointer.calendar.single.ICalendarsLocal;
+
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
 /**
@@ -10,23 +11,23 @@ import biweekly.component.VEvent;
  */
 public class CmdRemoveEvent implements AppCommand {
 
-	private final ICalendarsLocal appCalendar;
+	private final ICalendar appCalendar;
 	private final VEvent event;
 	private boolean executed = false;
 
-	public CmdRemoveEvent(ICalendarsLocal appCalendar, VEvent event) {
+	public CmdRemoveEvent(ICalendar appCalendar, VEvent event) {
 		this.appCalendar = appCalendar;
 		this.event = event;
 	}
 	
 	@Override
 	public void execute() {
-		executed = appCalendar.getValue().removeComponent(event);
+		executed = appCalendar.removeComponent(event);
 	}
 
 	@Override
 	public void undo() {
-		if (executed) appCalendar.getValue().addEvent(event);
+		if (executed) appCalendar.addEvent(event);
 	}
 
 	// leaf node

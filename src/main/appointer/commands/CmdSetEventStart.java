@@ -2,19 +2,16 @@ package appointer.commands;
 
 import java.time.LocalDate;
 
-import appointer.calendar.single.ICalendarsLocal;
 import appointer.util.date.DateAdapter;
 import biweekly.component.VEvent;
 
 public class CmdSetEventStart implements AppCommand {
 	
-	private final ICalendarsLocal appCalendar;
 	private final VEvent event;
 	private LocalDate currentStart;
 	private LocalDate previousStart; 
 	
-	public CmdSetEventStart(ICalendarsLocal appCalendar, VEvent event, LocalDate start) {
-		this.appCalendar = appCalendar;
+	public CmdSetEventStart(VEvent event, LocalDate start) {
 		this.event = event;
 		this.currentStart = start;
 	}

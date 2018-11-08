@@ -2,7 +2,7 @@ package appointer.commands;
 
 import java.util.List;
 
-import appointer.calendar.single.ICalendarsLocal;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ import java.util.ArrayList;
  */
 public class CmdComposite implements AppCommand {
 
-	private final ICalendarsLocal appCalendar;
+	private final ICalendar appCalendar;
 	private final VEvent event; 
  	private List<AppCommand> appCommands = new ArrayList<>();
  
-	public CmdComposite(ICalendarsLocal appCalendar, VEvent event) {
+	public CmdComposite(ICalendar appCalendar, VEvent event) {
 		this.appCalendar = appCalendar;
 		this.event = event;
 	}

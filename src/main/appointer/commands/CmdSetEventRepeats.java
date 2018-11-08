@@ -1,6 +1,5 @@
 package appointer.commands;
 
-import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
 import biweekly.property.RecurrenceRule;
 import biweekly.util.Frequency;
@@ -8,15 +7,13 @@ import biweekly.util.Recurrence;
 
 public class CmdSetEventRepeats implements AppCommand {
 	
-	private final ICalendarsLocal appCalendar;
 	private final VEvent event; 
  	private final Frequency frequency;
  	private RecurrenceRule currentRule;
  	private RecurrenceRule previousRule;
 	
 	
-	public CmdSetEventRepeats(ICalendarsLocal appCalendar, VEvent event, Frequency frequency) {
-		this.appCalendar = appCalendar;
+	public CmdSetEventRepeats(VEvent event, Frequency frequency) {
 		this.event = event;
 		this.frequency = frequency;
 	}

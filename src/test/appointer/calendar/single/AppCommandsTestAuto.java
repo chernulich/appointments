@@ -20,6 +20,8 @@ import appointer.commands.CmdRemoveEvent;
 import appointer.commands.CmdSetEventDuration;
 import appointer.commands.CmdSetEventRepeats;
 import appointer.commands.CmdSetEventStart;
+import appointer.user.SingletonAppUser;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.util.Duration;
 import biweekly.util.Frequency;
@@ -30,27 +32,28 @@ public class AppCommandsTestAuto {
 
 	private final static int STARTINGEVENTS = 10;
 
-	
 	@Test
 	public void addRemoveExecRedo() {
 
-		ICalendarsLocal appCalendar = new SingleCalendar("Alyssa P. Hacker");
+		SingletonAppUser.lazyGet("Alyssa P. Hacker");
+
+		ICalendar appCalendar = new ICalendar();
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
-		final int eventsInit = appCalendar.getValue().getEvents().size();
-		
+		final int eventsInit = appCalendar.getEvents().size();
+
 		VEvent event = EventFacade.createEventCurrentTime();
 
 		List<AppCommand> commands = createTestCommandAddRemove(appCalendar, event);
 
 		commands.stream().forEach(AppCommand::execute);
-		
+
 		Collections.reverse(commands);
-		
+
 		commands.stream().forEach(AppCommand::undo);
 
-		final List<VEvent> eventsEnd = appCalendar.getValue().getEvents();
+		final List<VEvent> eventsEnd = appCalendar.getEvents();
 
 //		System.out.println("Rolled number of commands: " + commands.size());
 //
@@ -61,48 +64,52 @@ public class AppCommandsTestAuto {
 		assertTrue(eventsEnd.size() == eventsInit);
 	}
 
-
 	@Test
 	public void randomExecRedo() {
 
-		ICalendarsLocal appCalendar = new SingleCalendar("Alyssa P. Hacker");
+		SingletonAppUser.lazyGet("Alyssa P. Hacker");
+
+		ICalendar appCalendar = new ICalendar();
 
 		addNEvents(appCalendar, STARTINGEVENTS);
 
-		final int eventsInit = appCalendar.getValue().getEvents().size();
-		// need an immutable event + event list in order to compare pre/post event states;
-		
+		final int eventsInit = appCalendar.getEvents().size();
+		// need an immutable event + event list in order to compare pre/post event
+		// states;
+
 		VEvent event = EventFacade.createEventCurrentTime();
 
 		List<AppCommand> commands = createTestCommandList(appCalendar, event);
 
 		int size = commands.size();
 
-		int testMaxCommands = gen.nextInt(size + 1); //gen.nexint upper is excusive;
+		int testMaxCommands = gen.nextInt(size + 1); // gen.nexint upper is excusive;
 
 		Collections.shuffle(commands);
 
-		List<AppCommand> commandsTrimmed = commands.stream().limit(testMaxCommands).collect(Collectors.toCollection(ArrayList::new));
-		
+		List<AppCommand> commandsTrimmed = commands.stream().limit(testMaxCommands)
+				.collect(Collectors.toCollection(ArrayList::new));
+
 		commandsTrimmed.stream().forEach(AppCommand::execute);
 
-		Collections.reverse(commandsTrimmed); 
-		// Command stack is ADT by itself; we must preserve order of the commands 
+		Collections.reverse(commandsTrimmed);
+		// Command stack is ADT by itself; we must preserve order of the commands
 		// when doint execute() and redo();
-		
+
 		commandsTrimmed.stream().forEach(AppCommand::undo);
 
-		final List<VEvent> eventsEnd = appCalendar.getValue().getEvents();
+		final List<VEvent> eventsEnd = appCalendar.getEvents();
 
 		assertTrue(eventsEnd.size() == eventsInit);
 	}
 
 	/**
 	 * Adds n event to the calendar
+	 * 
 	 * @param appCalendar
 	 * @param NEvents
 	 */
-	private void addNEvents(ICalendarsLocal appCalendar, int NEvents) {
+	private void addNEvents(ICalendar appCalendar, int NEvents) {
 
 		VEvent eventOne;
 
@@ -125,30 +132,28 @@ public class AppCommandsTestAuto {
 	 * @param event
 	 * @return
 	 */
-	private List<AppCommand> createTestCommandList(ICalendarsLocal appCalendar, VEvent event) {
+	private List<AppCommand> createTestCommandList(ICalendar appCalendar, VEvent event) {
 		List<AppCommand> appCommands = new ArrayList<>();
 
 		appCommands.add(new CmdAddEvent(appCalendar, event));
 
 		appCommands.add(new CmdRemoveEvent(appCalendar, event));
 
-		appCommands.add(new CmdSetEventDuration(appCalendar, event, Duration.builder().hours(1).build()));
+		appCommands.add(new CmdSetEventDuration(event, Duration.builder().hours(1).build()));
 
-		appCommands.add(new CmdSetEventDuration(appCalendar, event, Duration.builder().hours(1).build()));
+		appCommands.add(new CmdSetEventDuration(event, Duration.builder().hours(1).build()));
 
-		appCommands.add(new CmdSetEventRepeats(appCalendar, event, Frequency.DAILY));
+		appCommands.add(new CmdSetEventRepeats(event, Frequency.DAILY));
 
-		appCommands.add(new CmdSetEventRepeats(appCalendar, event, Frequency.DAILY));
+		appCommands.add(new CmdSetEventRepeats(event, Frequency.DAILY));
 
-		appCommands.add(new CmdSetEventStart(appCalendar, event, LocalDate.now()));
+		appCommands.add(new CmdSetEventStart(event, LocalDate.now()));
 
-		appCommands.add(new CmdSetEventStart(appCalendar, event,
-				LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.SUNDAY))));
+		appCommands.add(new CmdSetEventStart(event, LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.SUNDAY))));
 
 		return appCommands;
 	}
 
-	
 	/**
 	 * Creates a list of add/remove for unit testing AppCommand;
 	 * 
@@ -156,7 +161,7 @@ public class AppCommandsTestAuto {
 	 * @param event
 	 * @return
 	 */
-	private List<AppCommand> createTestCommandAddRemove(ICalendarsLocal appCalendar, VEvent event) {
+	private List<AppCommand> createTestCommandAddRemove(ICalendar appCalendar, VEvent event) {
 		List<AppCommand> appCommands = new ArrayList<>();
 
 		appCommands.add(new CmdAddEvent(appCalendar, event));

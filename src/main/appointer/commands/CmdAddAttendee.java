@@ -2,27 +2,24 @@ package appointer.commands;
 
 import java.util.List;
 
-import appointer.calendar.single.ICalendarsLocal;
 import biweekly.component.VEvent;
 import biweekly.property.Attendee;
-import biweekly.property.DurationProperty;
-import biweekly.util.Duration;
 
-public class CmdAddLocalAttendee implements AppCommand {
+public class CmdAddAttendee implements AppCommand {
 	
-	private final ICalendarsLocal appCalendar;
+	private final String user; 
 	private final VEvent event;  
 	private List<Attendee> currentAttendee;
  		
-	public CmdAddLocalAttendee(ICalendarsLocal appCalendar, VEvent event) {
-		this.appCalendar = appCalendar;
+	public CmdAddAttendee(String LocalName, VEvent event) {
+		this.user = LocalName;
 		this.event = event;
 	}
 
 	@Override 
 	public void execute() {
 		currentAttendee = event.getAttendees();
-		event.addAttendee(new Attendee(appCalendar.getName(), ""));
+		event.addAttendee(new Attendee(user, ""));
 	}
 
 	@Override

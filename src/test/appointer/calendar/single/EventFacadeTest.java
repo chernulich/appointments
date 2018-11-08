@@ -45,7 +45,7 @@ public class EventFacadeTest {
 
 		IUser user = new AppUser("Jane Smith");
 
-		ICalendar appCalendar = CalendarStorage.getValueByName(user.getName());
+		ICalendar appCalendar = CalendarStorage.getCalendarLazy(user.getName());
 
 		VEvent vEventOne = EventFacade.createEventCurrentTime(); // we still might need an adapter;
 

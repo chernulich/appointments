@@ -1,9 +1,8 @@
 package appointer.calendar.allcalendars;
 
-import appointer.calendar.single.ICalendarsLocal;
-import appointer.calendar.single.SingleCalendar;
 import appointer.user.AppUser;
 import appointer.user.IUser;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.property.Attendee;
 import biweekly.property.Organizer;
@@ -16,17 +15,17 @@ import biweekly.property.Organizer;
 public class Calendars {
 	
 	IUser user;
+	ICalendar localCalendar; 
 	
-	ICalendarsLocal localCalendar; 
-		
 	public Calendars(String name) {
 		user = new AppUser(name);
-		localCalendar = new SingleCalendar(user.getName());
+		CalendarStorage.addCalendar(name);
+		localCalendar = CalendarStorage.getCalendar(name);
 	}
 	
 	public void AddRemoteUser(String name) {
 		if (name == user.getName()) throw new IllegalArgumentException();
-		CalendarStorage.getValueByName(name);
+		CalendarStorage.getCalendar(name);
 	}
 	
 	// being refactored into command;
@@ -38,16 +37,16 @@ public class Calendars {
 	public void addAppointment(String orgname) {
 		VEvent event = new VEvent();
 		event.addAttendee(new Attendee(user.getName(), ""));
-		localCalendar.getValue().addEvent(event);
+		localCalendar.addEvent(event);
 		event.setOrganizer(new Organizer(orgname, ""));
 		
 	}
 	
 	public void removeEvent(VEvent event) {
-		localCalendar.getValue().removeComponent(event);
+		localCalendar.removeComponent(event);
 		String orgname = event.getOrganizer().getCommonName();
 		//TODO: async approve in remote;
-		CalendarStorage.getValueByName(orgname).addEvent(event);
+		CalendarStorage.getCalendarLazy(orgname).addEvent(event);
 	}
 	
 	public String toString() {

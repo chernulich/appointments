@@ -3,23 +3,24 @@ package appointer.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import appointer.calendar.single.ICalendarsLocal;
+import appointer.user.SingletonAppUser;
+import biweekly.ICalendar;
 import biweekly.component.VEvent;
 
 public class CmdAddAppointment implements AppCommand {
 	
-	private final ICalendarsLocal appCalendar;
+	private final ICalendar appCalendar;
 	private final VEvent event; 
  	private final String orgname;
 	private List<AppCommand> appCommands = new ArrayList<>();
  	
-	public CmdAddAppointment(ICalendarsLocal appCalendar, VEvent event, String organiser) {
+	public CmdAddAppointment(ICalendar appCalendar, VEvent event, String organiser) {
 		this.appCalendar = appCalendar;
 		this.event = event;
 		this.orgname = organiser;
 		add(new CmdAddEvent(appCalendar, event));
-		add(new CmdAddLocalAttendee(appCalendar, event));
-		add(new CmdSetOrganiser(appCalendar, event, orgname));
+		add(new CmdAddAttendee(SingletonAppUser.lazyGet().getName(), event));
+		add(new CmdSetOrganiser(event, orgname));
 		//TODO: async approve in remote;		
 		//TODO: command for CalendarStorage.getValueByName(orgname).addEvent(event);
 	}
