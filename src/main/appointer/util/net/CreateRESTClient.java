@@ -13,6 +13,8 @@ import appointer.calendar.facades.EventFacade;
 import appointer.http.dto.AppointmentEvent;
 import appointer.user.AppUser;
 import appointer.user.IUser;
+import appointer.util.date.DateAdapter;
+import biweekly.component.VEvent;
 
 /**
  * Tests connecting to the server, passes phone number to validate;
@@ -23,7 +25,16 @@ public class CreateRESTClient {
 
 	public static void postAppEvent() throws URISyntaxException {
 
-		AppointmentEvent appEvent = createDemoEvent();
+		VEvent event = createDemoEvent();
+		
+		AppointmentEvent appEvent = new AppointmentEvent();
+		appEvent.setOrganiser(event.getOrganizer().getCommonName());
+		appEvent.setAttendee(event.getAttendees().get(0).getCommonName());
+		appEvent.setStart(DateAdapter.asLocalDateTime(event.getDateStart().getValue()));
+		//appEvent.setEnd(DateAdapter.asLocalDateTime(event.getDateEnd().getValue()));
+		
+		System.out.println(appEvent.toString());
+		
 
 		final String url = "http://localhost:8080/attendee/create";
 
@@ -40,17 +51,17 @@ public class CreateRESTClient {
 
 	}
 
-	private static AppointmentEvent createDemoEvent() {
+	private static VEvent createDemoEvent() {
 
-		AppointmentEvent appEvent = new AppointmentEvent(EventFacade.createEventCurrentTime());
+		VEvent event = EventFacade.createEventCurrentTime();
 
 		IUser user = new AppUser("Jane Smith");
 
-		EventFacade.addAttendee(appEvent.getEvent(), user.getName());
+		EventFacade.addAttendee(event, user.getName());
 
-		EventFacade.setOrganiser(appEvent.getEvent(), "Ben Bitdiddle");
+		EventFacade.setOrganiser(event, "Ben Bitdiddle");
 
-		return appEvent;
+		return event;
 
 	}
 }
