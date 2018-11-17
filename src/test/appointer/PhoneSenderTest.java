@@ -1,6 +1,6 @@
 package appointer;
 
-import appointer.util.net.PhoneRESTClient;
+import appointer.net.client.PhoneRESTClient;
 
 /**
  * Demo of sending phone number to server and getting the answer

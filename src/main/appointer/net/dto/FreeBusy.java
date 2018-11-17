@@ -1,4 +1,4 @@
-package appointer.http.dto;
+package appointer.net.dto;
 
 import biweekly.component.VFreeBusy;
 
