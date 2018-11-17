@@ -2,20 +2,16 @@ package appointer.http;
 
 import java.time.LocalDate;
 
-import appointer.http.dto.AppointmentStatusObject;
+import appointer.http.dto.AppointmentEvent;
 import biweekly.property.FreeBusy;
 import biweekly.util.Duration;
 
 /**
  * Design whiteboard
- * @author shtirlitz
  *
  */
 public class MockHTTPClient {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub;
-	}
 
 	// /freebusy GET()
 	public FreeBusy freebusy() {
@@ -23,18 +19,18 @@ public class MockHTTPClient {
 	}
 
 	// /addappointment PUT(LocalDate start, Duration Duration)
-	public AppointmentStatusObject addAppointment(LocalDate start, Duration duration) {
-		return new AppointmentStatusObject();
+	public AppointmentEvent addAppointment(LocalDate start, Duration duration) {
+		return new AppointmentEvent();
 	} 
 	
 	// /checkAppointment PUT(AppointmentStatusObject statusObject)
-	public AppointmentStatusObject checkAppointment(AppointmentStatusObject statusObject) {
+	public AppointmentEvent checkAppointment(AppointmentEvent statusObject) {
 		return  statusObject;
 	}
 	
 	// /change PUT(LocalDate start, Duration Duration)
-	public AppointmentStatusObject changeAppointment(AppointmentStatusObject statusObject, LocalDate start, Duration duration) {
-		return new AppointmentStatusObject();
+	public AppointmentEvent changeAppointment(AppointmentEvent statusObject, LocalDate start, Duration duration) {
+		return new AppointmentEvent();
 	}
 
 	//	day4  -  designing web api;

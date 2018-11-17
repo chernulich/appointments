@@ -11,6 +11,7 @@ import java.util.stream.StreamSupport;
 
 import appointer.util.date.DateAdapter;
 import biweekly.component.VEvent;
+import biweekly.property.Attendee;
 import biweekly.property.Organizer;
 import biweekly.util.Duration;
 import biweekly.util.Frequency;
@@ -81,6 +82,18 @@ public class EventFacade {
 		event.setOrganizer(new Organizer(organiserName, ""));
 		return event;
 	}
+	
+	/**
+	 * 
+	 * @param event
+	 * @param attendeeName
+	 * @return
+	 */
+	public static VEvent addAttendee(VEvent event, String attendeeName) {
+		event.addAttendee(new Attendee(attendeeName, ""));
+		return event;
+	}
+	
 	
 	/**
 	 * @param event
