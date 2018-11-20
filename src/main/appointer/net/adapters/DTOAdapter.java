@@ -1,5 +1,7 @@
 package appointer.net.adapters;
 
+import java.util.UUID;
+
 import appointer.net.dto.AppointmentCreation;
 import appointer.util.date.DateAdapter;
 import biweekly.component.VEvent;
@@ -18,6 +20,9 @@ public class DTOAdapter {
 
 		// appEvent.setEnd(DateAdapter.asLocalDateTime(event.getDateEnd().getValue()));
 		// TODO: NPE ^
+		UUID uid = UUID.randomUUID();
+		
+		appEvent.setUid(uid);
 
 		return appEvent;
 

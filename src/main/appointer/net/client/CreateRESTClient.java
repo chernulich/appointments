@@ -20,14 +20,13 @@ public class CreateRESTClient {
 
 	static RestTemplate restTemplate = new RestTemplate();
 
-	public static void postAppEvent(VEvent event) throws URISyntaxException {
-
-		AppointmentCreation appEvent = DTOAdapter.toAppointmentCreation(event);
+	static HttpHeaders headers = new HttpHeaders();
+	
+	public static void attendeeNewAppointment(AppointmentCreation appEvent) throws URISyntaxException {
 				
 		final String url = "http://localhost:8080/attendee/create/";
 
-		HttpHeaders headers = new HttpHeaders();
-
+		
 		RequestEntity<AppointmentCreation> requestEntity = new RequestEntity<AppointmentCreation>(appEvent, headers,
 				HttpMethod.POST, new URI(url));
 
@@ -35,21 +34,17 @@ public class CreateRESTClient {
 
 		Boolean body = response.getBody();
 
-		System.out.println("Printing event creation result on server: " + body);
+		System.out.println("Printing event creation result on server: " + body + " with ID " + appEvent.getUid());
 
 	}
 	
-	public static void getAppEvent(String organiserName) throws URISyntaxException {
+	public static void organiserPendingAppoinmentPrint(String organiserName) throws URISyntaxException {
 			
 		final String url = "http://localhost:8080/organiser/create/";
-
-		
-		HttpHeaders headers = new HttpHeaders();
-
+	
 		RequestEntity<AppointmentCreation> requestEntity = new RequestEntity<AppointmentCreation>(headers,
 				HttpMethod.GET, new URI(url + "?orgname=" + organiserName));
 
-		System.out.println(requestEntity);
 		
 		ResponseEntity<AppointmentCreation> response = restTemplate.exchange(requestEntity, AppointmentCreation.class); // printing // without
 
