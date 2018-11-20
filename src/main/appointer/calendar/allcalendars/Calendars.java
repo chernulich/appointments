@@ -7,7 +7,7 @@ import biweekly.component.VEvent;
 import biweekly.property.Attendee;
 import biweekly.property.Organizer;
 
-// * localCalendar can be refactored off to oblivion
+
 /**
  * Represents user, local calendar and all remote calendars; 
  * Responsible for creating and approving events across the network of app users;

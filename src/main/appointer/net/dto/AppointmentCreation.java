@@ -1,7 +1,7 @@
 package appointer.net.dto;
 
-import java.rmi.server.UID;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 public class AppointmentCreation {
 	
-	UID uid;	
+	UUID uid;	
 	String organizer;
 	String attendee;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")

@@ -9,8 +9,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import appointer.net.adapters.DTOAdapter;
 import appointer.net.dto.AppointmentCreation;
-import appointer.util.date.DateAdapter;
 import biweekly.component.VEvent;
 
 /**
@@ -22,11 +22,9 @@ public class CreateRESTClient {
 
 	public static void postAppEvent(VEvent event) throws URISyntaxException {
 
-		AppointmentCreation appEvent = doAppointmentCreation(event);
-		
-		System.out.println(appEvent.toString());
-		
-		final String url = "http://localhost:8080/attendee/create";
+		AppointmentCreation appEvent = DTOAdapter.toAppointmentCreation(event);
+				
+		final String url = "http://localhost:8080/attendee/create/";
 
 		HttpHeaders headers = new HttpHeaders();
 
@@ -40,18 +38,28 @@ public class CreateRESTClient {
 		System.out.println("Printing event creation result on server: " + body);
 
 	}
+	
+	public static void getAppEvent(String organiserName) throws URISyntaxException {
+			
+		final String url = "http://localhost:8080/organiser/create/";
 
-	private static AppointmentCreation doAppointmentCreation(VEvent event) {
 		
-		AppointmentCreation appEvent = new AppointmentCreation();
-		appEvent.setOrganizer(event.getOrganizer().getCommonName());
-		appEvent.setAttendee(event.getAttendees().get(0).getCommonName());
-		appEvent.setStart(DateAdapter.asLocalDateTime(event.getDateStart().getValue()));
-		//appEvent.setEnd(DateAdapter.asLocalDateTime(event.getDateEnd().getValue()));
-		//TODO: NPE ^
-		return appEvent;
+		HttpHeaders headers = new HttpHeaders();
+
+		RequestEntity<AppointmentCreation> requestEntity = new RequestEntity<AppointmentCreation>(headers,
+				HttpMethod.GET, new URI(url + "?orgname=" + organiserName));
+
+		System.out.println(requestEntity);
 		
+		ResponseEntity<AppointmentCreation> response = restTemplate.exchange(requestEntity, AppointmentCreation.class); // printing // without
+
+		AppointmentCreation body = response.getBody();
+
+		System.out.println("Printing pulled event from server: " + body);
+
 	}
+
+	
 
 	
 }
